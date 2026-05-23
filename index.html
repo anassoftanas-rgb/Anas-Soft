@@ -504,7 +504,7 @@
                     class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button></div>
             <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير
                 صحيحة!</p>
-
+            <br>
             <div><button class="btn" onclick="window.open('https://wa.me/967734559604','_blank')" style="
 width:100%;
 margin-top:15px;
@@ -513,92 +513,15 @@ background:#25D366;
                     📞 التواصل مع المهندس طيف المقاومة
                 </button></div>
 
-            <div style="
-background: rgba(255,255,255,0.03);
-border: 1px solid rgba(56,189,248,0.25);
-border-radius: 18px;
-padding: 18px;
-margin-top: 25px;
-backdrop-filter: blur(8px);
-box-shadow: 0 0 15px rgba(0,0,0,0.15);
-">
+            <hr style="margin: 20px 0; border: 1px solid #ccc;">
 
-                <div style="
-    text-align:center;
-    margin-bottom:15px;
-    ">
-                    <h3 style="
-        margin:0;
-        color: var(--accent);
-        font-size:1.2rem;
-        ">
-                        📝 تقديم طلب جديد
-                    </h3>
-
-                    <p style="
-        opacity:0.8;
-        font-size:0.85rem;
-        margin-top:8px;
-        ">
-                        أرسل طلب الانضمام مباشرة عبر واتساب
-                    </p>
-                </div>
-
-                <input type="text" id="req-username" placeholder="👤 اسم المستخدم المطلوب" style="
-    width:100%;
-    padding:12px;
-    margin-bottom:12px;
-    border-radius:12px;
-    border:1px solid rgba(56,189,248,0.4);
-    background: rgba(0,0,0,0.2);
-    color: var(--text);
-    outline:none;
-    font-family:inherit;
-    ">
-
-                <input type="password" id="req-password" placeholder="🔑 كلمة المرور المقترحة" style="
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border-radius:12px;
-    border:1px solid rgba(56,189,248,0.4);
-    background: rgba(0,0,0,0.2);
-    color: var(--text);
-    outline:none;
-    font-family:inherit;
-    ">
-
-                <button onclick="requestAccount()" style="
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:14px;
-    background: linear-gradient(135deg,#25D366,#1da851);
-    color:white;
-    font-weight:bold;
-    font-size:1rem;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 0 12px rgba(37,211,102,0.3);
-    ">
-                    📲 تقديم الطلب عبر واتساب
-                </button>
-
-                <p id="auth-error" style="
-    color:#ef4444;
-    display:none;
-    margin-top:12px;
-    text-align:center;
-    font-size:0.9rem;
-    font-weight:bold;
-    ">
-                </p>
-
-            </div>
+            <h3>تقديم طلب جديد 📝</h3>
+            <input type="text" id="req-username" placeholder="الاسم المطلوب">
+            <input type="password" id="req-password" placeholder="كلمة المرور المقترحة">
             <button onclick="requestAccount()" style="background-color: #28a745;">تقديم الطلب (عبر واتساب)</button>
 
             <p id="auth-error" style="color: red; display: none; margin-top: 10px;"></p>
-
+            <br>
 
         </div>
     </div>
@@ -902,9 +825,7 @@ box-shadow: 0 0 15px rgba(0,0,0,0.15);
                 { user: "sala", pass: "sala123" },
                 { user: "moha", pass: "moha123" },
                 { user: "انس", pass: "سلا صالح" },
-                { user: "ahmed", pass: "ahmed123" },
-                { user: "صالح", pass: "saleh123" },
-                { user: "amin", pass: "amin123" }
+                { user: "ahmed", pass: "ahmed123" }
             ];
 
             // رقم الهاتف الخاص بك لاستقبال الطلبات
@@ -1034,7 +955,7 @@ box-shadow: 0 0 15px rgba(0,0,0,0.15);
                 const now = new Date().getTime();
 
                 // تحديد مدة الصلاحية (مثلاً 10 دقائق = 10 * 60 * 1000 ملي ثانية)
-                const expiryDuration = 10 * 60 * 1000;
+                const expiryDuration = 2 * 60 * 1000;
 
                 if (isLoggedIn === 'true' && loginTime) {
                     // حساب كم مر من الوقت منذ آخر دخول
