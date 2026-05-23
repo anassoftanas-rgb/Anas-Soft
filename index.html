@@ -505,20 +505,17 @@
             <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير
                 صحيحة!</p>
             <br>
-            <div><button class="btn" onclick="window.open('https://wa.me/967734559604','_blank')" style="
-width:100%;
-margin-top:15px;
-background:#25D366;
-">
-                    📞 التواصل مع المهندس طيف المقاومة
-                </button></div>
+
 
             <hr style="margin: 20px 0; border: 1px solid #ccc;">
 
             <h3>تقديم طلب جديد 📝</h3>
-            <input type="text" id="req-username" placeholder="الاسم المطلوب">
-            <input type="password" id="req-password" placeholder="كلمة المرور المقترحة">
-            <button onclick="requestAccount()" style="background-color: #28a745;">تقديم الطلب (عبر واتساب)</button>
+            <input type="text" id="req-username" placeholder="الاسم المطلوب"
+                style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
+            <input type="password" id="req-password" placeholder="كلمة المرور المقترحة"
+                style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
+            <button class="btn btn-dec" onclick="requestAccount()" style="background-color: #28a745;">تقديم الطلب (عبر
+                واتساب)</button>
 
             <p id="auth-error" style="color: red; display: none; margin-top: 10px;"></p>
             <br>
@@ -923,7 +920,7 @@ background:#25D366;
                 const now = new Date().getTime();
 
                 // مدة صلاحية الجلسة (10 دقائق)
-                const expiryDuration = 10 * 60 * 1000;
+                const expiryDuration = 5 * 60 * 1000;
 
                 if (isLoggedIn === 'true' && loginTime) {
                     const timePassed = now - parseInt(loginTime);
@@ -955,7 +952,7 @@ background:#25D366;
                 const now = new Date().getTime();
 
                 // تحديد مدة الصلاحية (مثلاً 10 دقائق = 10 * 60 * 1000 ملي ثانية)
-                const expiryDuration = 2 * 60 * 1000;
+                const expiryDuration = 5 * 60 * 1000;
 
                 if (isLoggedIn === 'true' && loginTime) {
                     // حساب كم مر من الوقت منذ آخر دخول
