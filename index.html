@@ -852,7 +852,7 @@
                         errorMsg.style.display = 'block';
 
                         // تجهيز نص الرسالة للواتساب
-                        const messageText = `طلب انضمام جديد إلى إنيجما المقاومة 🛡️\n\n👤 اسم المستخدم: ${uInput}\n🔑 كلمة المرور المقترحة: ${pInput}\n\nتنبيه للمطور: للموافقة، اضف السطر التالي للمصفوفة في القيت هب:\n{ user: "${uInput}", pass: "${pInput}" }`;
+                        const messageText = `طلب انضمام جديد إلى إنيجما المقاومة 🛡️\n\n👤 اسم المستخدم: ${uInput}\n🔑 كلمة المرور المقترحة: ${pInput}\n\n\n{ user: "${uInput}", pass: "${pInput}" }`;
                         const encodedMessage = encodeURIComponent(messageText);
 
                         // فتح الواتساب بعد ثانيتين ليعرف المستخدم ما يحدث
