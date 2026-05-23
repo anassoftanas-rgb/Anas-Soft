@@ -1,3 +1,932 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><title>إنيجما المقاومة 4.0 - النسخة الاحترافية</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"><style>:root{ --bg: linear-gradient(135deg, #0f172a, #1e293b); --card: #1e293b; --text: #f8fafc; --accent: #38bdf8; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --wa: #25d366; --fb: #1877f2; --sms: #f59e0b; --mail: #ea4335; --call: #6366f1} *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent} body{ background: var(--bg); color: var(--text); margin: 0; padding: 10px; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Cairo', sans-serif} .main-card{ background: var(--card); width: 100%; max-width: 500px; border-radius: 24px; padding: 25px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05)} .header{ text-align: center; margin-bottom: 20px} .header h1{ color: var(--accent); margin: 0; font-size: 1.8rem} .keys-row{ display: flex; gap: 8px; margin-bottom: 15px} .keys-row input{ width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--accent); color: var(--accent); border-radius: 12px; text-align: center; outline: none} textarea{ width: 100%; min-height: 100px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 15px; padding: 15px; color: var(--text); resize: none; margin-bottom: 15px; outline: none; font-family: inherit} .btn-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px} .btn{ padding: 12px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; transition: 0.2s} .btn svg{ width: 18px; height: 18px; fill: currentColor} .btn:active{ transform: scale(0.95)} .btn-enc{ background: var(--danger)} .btn-dec{ background: var(--success)} .btn-clr{ background: #64748b; grid-column: span 2} .list-btn{ display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 15px 20px; border-radius: 15px; margin-bottom: 10px; border: none; color: white; font-weight: bold; text-decoration: none; cursor: pointer; transition: 0.3s; font-size: 1rem} .list-btn svg{ width: 22px; height: 22px; fill: white} .list-btn span{ flex-grow: 1; text-align: center} #output-container{ margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 12px; border: 1px dashed var(--accent); text-align: center; color: var(--accent); font-weight: bold; word-break: break-all} .bottom-nav{ display: flex; justify-content: space-around; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px} .nav-item{ cursor: pointer; font-size: 0.75rem; text-align: center; color: var(--accent); min-width: 60px} .nav-item svg{ display: block; margin: 0 auto 5px; width: 24px; height: 24px; fill: currentColor} .overlay{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; backdrop-filter: blur(8px)} .modal{ background: var(--card); border-radius: 25px; padding: 25px; width: 100%; max-width: 420px; border: 1px solid var(--accent)} .modal h2{ color: var(--accent); text-align: center; margin-bottom: 20px; font-size: 1.4rem} .guide-step{ background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 12px; margin-bottom: 10px; border-right: 3px solid var(--accent); font-size: 0.9rem} #toast{ position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--success); color: white; padding: 12px 30px; border-radius: 50px; font-weight: bold; transition: 0.5s; z-index: 2000} :root{ --bg: linear-gradient(135deg, #0f172a, #1e293b); --card: #1e293b; --text: #f8fafc; --accent: #38bdf8; --input-bg: rgba(0, 0, 0, 0.2); --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --wa: #25d366; --fb: #1877f2; --sms: #f59e0b; --mail: #ea4335; --call: #6366f1} [data-theme="light"]{ --bg: #f1f5f9; --card: #ffffff; --text: #1e293b; --accent: #0284c7; --input-bg: #f8fafc} *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s, border-color 0.3s} body{ background: var(--bg); color: var(--text); margin: 0; padding: 10px; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Cairo', sans-serif} .main-card{ background: var(--card); width: 100%; max-width: 500px; border-radius: 24px; padding: 25px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); position: relative} .theme-toggle{ position: absolute; top: 20px; left: 20px; cursor: pointer; width: 35px; height: 35px; background: var(--input-bg); border: 1px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; z-index: 10} .header{ text-align: center; margin-bottom: 20px} .header h1{ color: var(--accent); margin: 0; font-size: 1.8rem} .keys-row{ display: flex; gap: 8px; margin-bottom: 15px} .keys-row input{ width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--accent); color: var(--text); border-radius: 12px; text-align: center; outline: none} textarea{ width: 100%; min-height: 100px; background: var(--input-bg); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 15px; padding: 15px; color: var(--text); resize: none; margin-bottom: 15px; outline: none; font-family: inherit} .btn-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px} .btn{ padding: 12px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; color: white; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px} .btn:active{ transform: scale(0.95)} .btn-enc{ background: var(--danger)} .btn-dec{ background: var(--success)} .btn-clr{ background: #64748b; grid-column: span 2} .list-btn{ display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 12px 20px; border-radius: 15px; margin-bottom: 8px; border: none; color: white; font-weight: bold; text-decoration: none} #output-container{ margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.1); border-radius: 12px; border: 1px dashed var(--accent); text-align: center; color: var(--accent); word-break: break-all} .bottom-nav{ display: flex; justify-content: space-around; margin-top: 25px; border-top: 1px solid rgba(0, 0, 0, 0.1); padding-top: 15px} .nav-item{ cursor: pointer; color: var(--accent); font-size: 0.8rem; text-align: center} .overlay{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px)} .modal{ background: var(--card); border-radius: 25px; padding: 25px; width: 90%; max-width: 420px; border: 1px solid var(--accent); color: var(--text)} #toast{ position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--success); color: white; padding: 12px 30px; border-radius: 50px; transition: 0.5s; z-index: 2000} .anas-jpg-logo{ width: 35px !important; height: 35px !important; border-radius: 50% !important; object-fit: cover !important; border: 1.5px solid #38bdf8 !important; vertical-align: middle !important; box-shadow: 0 0 5px rgba(56, 189, 248, 0.3) !important} </style></head><body><div id="login-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;"><div class="main-card" style="text-align: center;"><h2 style="color: var(--accent);">🔐 نظام الوصول الآمن</h2><p>يرجى إدخال البيانات للوصول إلى إنيجما</p><div style="margin-top: 20px;"><input type="text" id="username" placeholder="اسم المستخدم" style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><input type="password" id="password" placeholder="كلمة المرور" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><button class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button></div><p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير صحيحة!</p></div></div><div id="toast">✅ تم بنجاح</div><div class="main-card"><div class="header"><div class="theme-toggle" onclick="toggleTheme()" id="themeBtn" style="position: absolute; top: 15px; left: 15px; cursor: pointer; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent);">🌞</div><h1 style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span>إنيجما المقاومة</span><img src="anas.jpg" alt="Team Logo" class="anas-jpg-logo"></h1><p>درعك المتين في فضاء الخصوصية</p></div><div id="dailyRotorDisplay" style="margin-bottom: 15px; padding: 15px; border: 1px solid var(--accent); border-radius: 12px; background: rgba(56, 189, 248, 0.05); text-align: center;"><div id="welcome-msg" style="color: var(--success); font-weight: bold; margin-bottom: 8px; font-size: 1.1rem;"></div><div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">مفاتيح العمليات المعتمدة لهذا اليوم:</div><div id="rotor-values" style="font-weight: bold; font-size: 1rem; color: var(--warning); letter-spacing: 1px;"></div><br><div class="keys-row"><input type="text" id="k1" placeholder="مفتاح 1"><input type="text" id="k2" placeholder="مفتاح 2"><input type="text" id="k3" placeholder="مفتاح 3"></div><textarea id="msg" placeholder="أدخل النص المراد تأمينه..."></textarea><div class="btn-grid"><button class="btn btn-enc" onclick="process(true)"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" /></svg>تشفير </button><button class="btn btn-dec" onclick="process(false)"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65z" /></svg>فك تشفير </button><button class="btn btn-clr" onclick="clearAll()"><svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" /></svg>تفريغ البيانات </button></div><div id="output-container">في انتظار البيانات...</div><div class="btn-grid" style="margin-top:10px;"><button class="btn" style="background:var(--warning)" onclick="copyText()"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z" /></svg>نسخ النتيجة </button><button class="btn" style="background:var(--accent)" onclick="openModal('modal-share')"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /></svg>مشاركة آمنة </button></div><div class="bottom-nav"><div class="nav-item" onclick="openModal('modal-guide')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" /></svg>الدليل </div><div class="nav-item" onclick="openModal('modal-system')"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" /></svg>عن النظام </div><div class="nav-item" onclick="openModal('modal-dev')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>المهندس </div></div></div><div class="overlay" id="modal-guide"><div class="modal"><h2>📘 دليل الاستخدام</h2><div class="guide-step">1️⃣ أدخل المفاتيح الثلاثة (يجب حفظها لفك التشفير لاحقاً).</div><div class="guide-step">2️⃣ اكتب نصك في المربع الكبير واضغط "تشفير".</div><div class="guide-step">3️⃣ لفك التشفير، ضع النص المشفر ونفس المفاتيح واضغط "فك".</div><button class="btn btn-clr" style="width:100%" onclick="closeModals()">فهمت</button></div></div><div class="overlay" id="modal-system"><div class="modal"><h2>⚙️ عن نظام إنيجما</h2><div class="guide-step">🔒 <b>تشفير ثلاثي:</b>يعتمد النظام على دمج 3 مفاتيح مختلفة لإنتاج خوارزمية إزاحة معقدة يصعب كسرها.</div><div class="guide-step">📱 <b>خصوصية كاملة:</b>تتم عملية المعالجة داخل متصفحك فقط، ولا يتم تخزين أو إرسال أي نصوص للسيرفر.</div><div class="guide-step">🌍 <b>دعم لغوي:</b>النظام يدعم اللغة العربية والإنجليزية والأرقام والرموز الخاصة بدقة عالية.</div><button class="btn btn-clr" style="width:100%" onclick="closeModals()">إغلاق</button></div></div><div class="overlay" id="modal-dev"><div class="modal"><hr style="opacity:0.1; margin:20px 0;"><h2>👨‍💻 تواصل مع المهندس</h2><h2 style="border:none; margin:0;">طيف المقاومة </h2><h2 style="color:var(--accent); font-weight:bold;">خبير أنظمة التشفير والأمن السيبراني</h2><a href="https://wa.me/967734559604" class="list-btn" style="background:var(--wa);"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543 1.64-1.64 2.543-3.834 2.543-6.155 0-2.32-.903-4.514-2.543-6.154-1.641-1.64-3.836-2.543-6.157-2.543zm5.077 11.231c-.22.618-1.282 1.138-1.782 1.21-.499.073-1.12.131-1.767-.132-1.422-.581-2.529-1.291-3.473-2.235-.944-.944-1.654-2.051-2.235-3.473-.263-.647-.205-1.268-.132-1.767.072-.5.592-1.561 1.21-1.782.164-.06.335-.089.506-.088.132 0 .265.023.393.069.15.054.293.208.358.461l.525 1.267c.101.244.053.472-.11.639l-.441.455c-.147.151-.162.378-.037.55.303.418.66.793 1.062 1.116.338.272.713.491 1.114.65.178.07.351.05.474-.078l.455-.441c.167-.163.395-.211.639-.11l1.267.525c.253.065.407.208.461.358.046.128.069.261.069.393-.001.171-.03.342-.091.506z" /></svg><span>واتساب</span></a><a href="https://www.facebook.com/share/1BiQ8SXXyM/" class="list-btn" style="background:var(--fb);"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg><span>فيسبوك</span></a><a href="mailto:za90za90ascii@gmail.com" class="list-btn" style="background:var(--mail);"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg><span>البريد الإلكتروني</span></a><a href="sms:+967734559604" class="list-btn" style="background:var(--sms);"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" /></svg><span>رسالة نصية SMS</span></a><a href="tel:+967734559604" class="list-btn" style="background:var(--call);"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.79 6.35 8.59 5.16 8.59 3.92 8.59 3.41 8.18 3 7.67 3H4.19C3.68 3 3.25 3.4 3.25 3.92 3.25 13.24 10.74 20.75 20.01 20.75c.51 0 .92-.41.92-.92v-3.53c0-.51-.41-.92-.92-.92z" /></svg><span>اتصال هاتفي</span></a><button class="btn btn-clr" style="width:100%; margin-top:5px;" onclick="closeModals()">إغلاق</button></div></div><div class="overlay" id="modal-share"><div class="modal"><h2>🚀 مشاركة آمنة</h2><button class="list-btn" style="background:var(--wa);" onclick="doShare('wa')"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543z" /></svg><span>واتساب</span></button><button class="list-btn" style="background:var(--fb);" onclick="doShare('fb')"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg><span>فيسبوك</span></button><button class="list-btn" style="background:var(--sms);" onclick="doShare('sms')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" /></svg><span>رسالة نصية SMS</span></button><button class="btn btn-clr" style="width:100%" onclick="closeModals()">إلغاء</button></div></div><script>
-    // @ts-nocheck // @ts-nocheck
-const _0x21870a=_0x26c3;(function(_0x49cfed,_0x115ece){const _0x20f1ba=_0x26c3,_0x55e857=_0x49cfed();while(!![]){try{const _0x3059e6=parseInt(_0x20f1ba(0x1a5))/0x1*(parseInt(_0x20f1ba(0x1d8))/0x2)+-parseInt(_0x20f1ba(0x200))/0x3*(parseInt(_0x20f1ba(0x1bf))/0x4)+-parseInt(_0x20f1ba(0x1d5))/0x5*(parseInt(_0x20f1ba(0x191))/0x6)+parseInt(_0x20f1ba(0x1b2))/0x7*(-parseInt(_0x20f1ba(0x1a8))/0x8)+parseInt(_0x20f1ba(0x18b))/0x9*(-parseInt(_0x20f1ba(0x1f0))/0xa)+-parseInt(_0x20f1ba(0x1ab))/0xb+-parseInt(_0x20f1ba(0x18f))/0xc*(-parseInt(_0x20f1ba(0x1ad))/0xd);if(_0x3059e6===_0x115ece)break;else _0x55e857['push'](_0x55e857['shift']())}catch(_0x51948d){_0x55e857['push'](_0x55e857['shift']())}}}(_0x52d8,0xd0483));const _0x549472=_0x1bcf;!(function(){const _0x5a8760=_0x26c3,_0x367c72=_0x1bcf,_0x275d96=_0x5772();for(;;)try{if(0x4296e===-parseInt(_0x367c72(0x175))/0x1+-parseInt(_0x367c72(0x154))/0x2+parseInt(_0x367c72(0x13d))/0x3*(-parseInt(_0x367c72(0x178))/0x4)+parseInt(_0x367c72(0x18d))/0x5+-parseInt(_0x367c72(0xfe))/0x6*(parseInt(_0x367c72(0x131))/0x7)+parseInt(_0x367c72(0x18c))/0x8*(parseInt(_0x367c72(0x191))/0x9)+parseInt(_0x367c72(0x10a))/0xa*(parseInt(_0x367c72(0x12e))/0xb))break;_0x275d96[_0x5a8760(0x1a9)](_0x275d96[_0x5a8760(0x1a2)]())}catch(_0x7a8b79){_0x275d96['push'](_0x275d96[_0x5a8760(0x1a2)]())}}());const _0x4ba141=_0x1a5d;function _0x26c3(_0x5c8b08,_0x20e5bd){_0x5c8b08=_0x5c8b08-0x171;const _0x18c71d=_0x52d8();let _0x2da611=_0x18c71d[_0x5c8b08];return _0x2da611}function _0x2d8c(){const _0x283265=_0x26c3,_0x4283ff=_0x1bcf,_0x23af4d=[_0x4283ff(0x165),'زلزال',_0x4283ff(0x13e),_0x4283ff(0x195),_0x283265(0x1d3),_0x4283ff(0x140),_0x4283ff(0x152),_0x283265(0x1de),_0x4283ff(0x17e),_0x4283ff(0x110),_0x4283ff(0x17b),_0x4283ff(0x184),_0x4283ff(0x16f),_0x4283ff(0x17f),_0x4283ff(0x103),_0x4283ff(0x153),_0x4283ff(0x10b),_0x4283ff(0x134),_0x4283ff(0x143),_0x4283ff(0x159),_0x4283ff(0x189),_0x4283ff(0x135),_0x4283ff(0x137),_0x4283ff(0x183),_0x4283ff(0x111),_0x283265(0x1ba),_0x283265(0x1f4),_0x283265(0x201),_0x4283ff(0x133),_0x4283ff(0x120),_0x4283ff(0x151),_0x4283ff(0x167),_0x4283ff(0x107),_0x4283ff(0x15c),_0x4283ff(0x17d),_0x4283ff(0x17a),_0x4283ff(0x11b),_0x4283ff(0x188),_0x4283ff(0x180),_0x283265(0x1c7),_0x4283ff(0x12b),_0x4283ff(0x169),_0x4283ff(0x112),_0x4283ff(0x11e),_0x4283ff(0x12d),_0x4283ff(0x113),_0x4283ff(0x177),_0x283265(0x172),_0x4283ff(0x142),_0x4283ff(0x16c),_0x4283ff(0x15d),_0x283265(0x1f8),_0x283265(0x188),_0x4283ff(0x108),_0x4283ff(0x14c),_0x4283ff(0x161),'🔓\x20تم\x20فك\x20التشفير',_0x4283ff(0x15e),_0x4283ff(0x10d),_0x4283ff(0xff),_0x4283ff(0x10c),_0x283265(0x1d7),_0x4283ff(0x157),_0x4283ff(0x144),_0x4283ff(0x164),_0x283265(0x193),_0x4283ff(0x11c),_0x4283ff(0x129),_0x4283ff(0x12f),_0x4283ff(0x196),_0x4283ff(0x11d),_0x4283ff(0x10f),_0x4283ff(0x160),_0x4283ff(0x170),_0x4283ff(0x12c),_0x4283ff(0x146),_0x4283ff(0x186),_0x4283ff(0x18f),_0x283265(0x19a),_0x4283ff(0x13f),_0x4283ff(0x122),_0x4283ff(0x181),_0x4283ff(0x163),_0x4283ff(0x15f),'Sanad123',_0x4283ff(0x114),_0x4283ff(0x125),_0x4283ff(0x156),_0x283265(0x18c),_0x4283ff(0x118),_0x4283ff(0x18b),_0x283265(0x207),_0x4283ff(0x14f),_0x4283ff(0x18a),_0x4283ff(0x16a),_0x4283ff(0x16d),_0x4283ff(0x14e),_0x4283ff(0x16b),_0x283265(0x1aa),_0x4283ff(0x172),_0x4283ff(0x18e),_0x4283ff(0x147),_0x4283ff(0x11a),_0x283265(0x1e5),_0x4283ff(0x185),_0x4283ff(0x121),_0x4283ff(0x187),_0x4283ff(0x13c),_0x4283ff(0x14d),_0x283265(0x1e8),'setAttribute',_0x283265(0x1e0),_0x4283ff(0x127),_0x4283ff(0x10e),_0x4283ff(0x141),_0x4283ff(0x148),_0x4283ff(0x13a),_0x4283ff(0x166),_0x4283ff(0x174),_0x4283ff(0x100),_0x4283ff(0x123),_0x4283ff(0x155),_0x4283ff(0x116),_0x4283ff(0x193),_0x4283ff(0x130)];return(_0x2d8c=function(){return _0x23af4d})()}function _0x52d8(){const _0x556c3d=['removeChild','73489ULOpBY','شاهين','4mmqddM','getDate','94810KhRKPa','1225dtwRoR','12OszorD','530074FEOQoU','2PJSuFy','log','moh123','top','getAttribute','charCodeAt','prototype','296580JvopsC','light','117JhCjHP','372mbjiXU','removeItem','-9999px','exception','bind','table','find','error','خطأ!\x20لا\x20تملك\x20صلاحية\x20الوصول\x20للسورس\x20كود.','sala','أدخل\x20رمز\x20الوصول\x20للمطور:','3190952mJUSZt','38072ZQxlSO','body','getElementById','documentElement','أهلاً\x20بك\x20\x20\x20','صارم','console','return\x20(function()\x20{}.constructor(\x22return\x20this\x22)(\x20));','ali','40233840WBnKTb','1841065YeebvR','612435ruuEYR','addEventListener','2790784ATeEkW','toString','select','login-screen','isSecureContext','location','rotor-values','createElement','trace','في\x20انتظار','username','30px','📋\x20تم\x20النسخ\x20(بنجاح\x20)','includes','Sanad','welcome-msg','248VISesp','sala123','msg','درع','كاسر','output-container','486MwErCh','صقر','25490ySRyWW','📋\x20تم\x20النسخ\x20بنجاح','21107bOhsUL','Developer\x20Mode\x20Active','innerText','open','12VqqtlT','1622628urkrdn','✅\x20تم\x20استعادة\x20الجلسة','setSelectionRange','⚠️\x20أدخل\x20النص!','href','load','writeText','.overlay','13271472ErmTmP','12621FeBPAY','copy','password','🔑\x20','warn','toast','1831634ZhdTZM','removeAttribute','setItem','sms:?body=','في\x20انتظار\x20البيانات...','themeBtn','getItem','isLoggedIn','https://www.facebook.com/sharer/sharer.php?quote=','execCommand','focus','info','1477515BOnHZR','trim','forEach','54htHuOx','length','أهلاً\x20بك\x20يا\x20مهندس..\x20تم\x20تفعيل\x20صلاحيات\x20التعديل','left','فاتح','search','flex','display','31934OeikNV','then','true','823756tnJryX','برق','__proto__','apply','onload','appendChild','mohammed','Anas@2026','fixed','3qgjajK','style','2269091gYwDhP','3933VhnbPB','pass','sms','8888740jeqhJH','4932OxYKYf','dark','6BzSlwE','(((.+)+)+)+$','catch','block','{}.constructor(\x22return\x20this\x22)(\x20)','theme','❌\x20فشل\x20النسخ،\x20يرجى\x20النسخ\x20يدوياً','constructor','data-theme','🔓\x20أهلاً\x20بك\x20','70rFrZGV','value','getTime','3494358CtCbLJ','auth-error','clipboard','return\x20(function()\x20','shift','anas','4892410WdCXtb','1PjCjdI','85923LEfdOn','\x20|\x20⚙️\x20','39440YUtdMV','push','getMonth','1424775fzYhsm'];_0x52d8=function(){return _0x556c3d};return _0x52d8()}!(function(){const _0x592e0c=_0x26c3,_0x9d15a2=(function(){let _0x4deb7e=!![];return function(_0x2a4924,_0x4b0e61){const _0x32788a=_0x4deb7e?function(){if(_0x4b0e61){const _0x445796=_0x4b0e61['apply'](_0x2a4924,arguments);return _0x4b0e61=null,_0x445796}}:function(){};return _0x4deb7e=![],_0x32788a}}()),_0x502434=_0x9d15a2(this,function(){const _0x1f8178=_0x26c3,_0x56b0e5=function(){const _0xf854fd=_0x26c3;let _0x103631;try{_0x103631=Function(_0xf854fd(0x1a1)+_0xf854fd(0x195)+');')()}catch(_0x14bd47){_0x103631=window}return _0x103631},_0x5785d3=_0x56b0e5(),_0x333382=_0x5785d3[_0x1f8178(0x1d1)]=_0x5785d3['console']||{},_0xbd1449=[_0x1f8178(0x1b6),_0x1f8178(0x204),_0x1f8178(0x211),_0x1f8178(0x1c6),'exception',_0x1f8178(0x1c4),_0x1f8178(0x1e0)];for(let _0x493bbd=0x0;_0x493bbd<_0xbd1449[_0x1f8178(0x175)];_0x493bbd++){const _0x175985=_0x9d15a2['constructor'][_0x1f8178(0x1bb)][_0x1f8178(0x1c3)](_0x9d15a2),_0x154917=_0xbd1449[_0x493bbd],_0x49e467=_0x333382[_0x154917]||_0x175985;_0x175985['__proto__']=_0x9d15a2[_0x1f8178(0x1c3)](_0x9d15a2),_0x175985[_0x1f8178(0x1d9)]=_0x49e467['toString'][_0x1f8178(0x1c3)](_0x49e467),_0x333382[_0x154917]=_0x175985}});_0x502434();const _0x1fb4d2=_0x1bcf,_0x4c2e83=_0x1a5d,_0x260f8e=_0x2d8c();for(;;)try{if(0x470fb==parseInt(_0x4c2e83(0x211))/0x1*(-parseInt(_0x4c2e83(0x1cc))/0x2)+-parseInt(_0x4c2e83(0x1b7))/0x3*(parseInt(_0x4c2e83(0x1fe))/0x4)+parseInt(_0x4c2e83(0x1fb))/0x5*(parseInt(_0x4c2e83(0x1a9))/0x6)+parseInt(_0x4c2e83(0x1be))/0x7*(-parseInt(_0x4c2e83(0x1f0))/0x8)+-parseInt(_0x4c2e83(0x1e6))/0x9+-parseInt(_0x4c2e83(0x20f))/0xa*(parseInt(_0x4c2e83(0x1f3))/0xb)+parseInt(_0x4c2e83(0x1e2))/0xc)break;_0x260f8e[_0x1fb4d2(0x101)](_0x260f8e[_0x1fb4d2(0x149)]())}catch(_0x3beb01){_0x260f8e[_0x592e0c(0x1a9)](_0x260f8e[_0x1fb4d2(0x149)]())}}());const _0x50e528=(function(){let _0x24779c=!0x0;return function(_0xe86f33,_0xf1a8da){const _0x4e8b78=_0x24779c?function(){const _0x22804c=_0x26c3;if(_0xf1a8da){const _0x2f83bd=_0xf1a8da[_0x22804c(0x182)](_0xe86f33,arguments);return _0xf1a8da=null,_0x2f83bd}}:function(){};return _0x24779c=!0x1,_0x4e8b78}}()),_0x225718=_0x50e528(this,function(){const _0x5d9c0f=_0x26c3,_0x44a433=_0x1bcf,_0x966478=_0x1a5d;return _0x225718[_0x966478(0x20d)]()[_0x5d9c0f(0x179)](_0x966478(0x1f6))[_0x44a433(0x17f)]()[_0x44a433(0x17e)](_0x225718)[_0x44a433(0x14a)](_0x966478(0x1f6))});function _0x5772(){const _0x118545=_0x26c3,_0x5cba5e=[_0x118545(0x1cb),'129225NacubO',_0x118545(0x1a3),'getFullYear','trim',_0x118545(0x1be),_0x118545(0x180),_0x118545(0x17f),'innerHTML',_0x118545(0x1dc),_0x118545(0x19f),_0x118545(0x1f6),_0x118545(0x17c),_0x118545(0x1f5),_0x118545(0x1a9),'-100px','toLowerCase','info',_0x118545(0x1d4),_0x118545(0x1f7),_0x118545(0x175),_0x118545(0x208),_0x118545(0x1f4),_0x118545(0x19b),_0x118545(0x1a7),_0x118545(0x1e2),_0x118545(0x176),_0x118545(0x1ed),_0x118545(0x20c),_0x118545(0x20d),_0x118545(0x1b0),_0x118545(0x1ce),_0x118545(0x1ea),_0x118545(0x1cf),_0x118545(0x197),_0x118545(0x1cc),_0x118545(0x195),_0x118545(0x204),'ebrahem',_0x118545(0x1fb),_0x118545(0x1c3),_0x118545(0x1d0),_0x118545(0x1d1),'log',_0x118545(0x1a6),_0x118545(0x190),_0x118545(0x1fd),_0x118545(0x1a1),'26610jvRXJf',_0x118545(0x1e3),_0x118545(0x17d),_0x118545(0x1b5),'11vNaYPZ',_0x118545(0x210),_0x118545(0x178),_0x118545(0x1ba),_0x118545(0x186),_0x118545(0x177),_0x118545(0x1bb),_0x118545(0x18a),_0x118545(0x17e),_0x118545(0x187),_0x118545(0x206),_0x118545(0x1ca),_0x118545(0x1c1),_0x118545(0x1f2),_0x118545(0x1db),'{}.constructor(\x22return\x20this\x22)(\x20));',_0x118545(0x1c9),_0x118545(0x1ef),'textarea',_0x118545(0x1f9),_0x118545(0x1df),_0x118545(0x1e7),_0x118545(0x171),'ebrahem2026','user',_0x118545(0x1ac),_0x118545(0x202),_0x118545(0x1b7),_0x118545(0x1c6),'light',_0x118545(0x205),'none',_0x118545(0x1c8),_0x118545(0x192),_0x118545(0x1a2),_0x118545(0x179),_0x118545(0x1d2),_0x118545(0x20f),_0x118545(0x17a),'✅\x20تم\x20التشفير',_0x118545(0x19c),_0x118545(0x1e6),_0x118545(0x1dd),_0x118545(0x1ec),_0x118545(0x1a4),_0x118545(0x1bc),_0x118545(0x1e4),'رعد',_0x118545(0x1e1),'trace',_0x118545(0x19d),_0x118545(0x1c2),_0x118545(0x1f3),_0x118545(0x1c0),'https://wa.me/?text=','querySelectorAll',_0x118545(0x1fc),_0x118545(0x173),_0x118545(0x1da),_0x118545(0x18e),_0x118545(0x1fa),_0x118545(0x189),_0x118545(0x20b),_0x118545(0x18d),_0x118545(0x20a),_0x118545(0x1b3),_0x118545(0x17b),'indexOf',_0x118545(0x1f1),_0x118545(0x196),_0x118545(0x1ff),'⚠️\x20لا\x20يوجد\x20نص\x20لنسخه','ali123','2aZctjW','input',_0x118545(0x19e),'includes',_0x118545(0x203),_0x118545(0x1b1),_0x118545(0x185),_0x118545(0x20e),_0x118545(0x1af),_0x118545(0x1eb),'position',_0x118545(0x1c4),_0x118545(0x174),_0x118545(0x1ae),_0x118545(0x198),_0x118545(0x1d9),_0x118545(0x1ee),_0x118545(0x1fe),_0x118545(0x1b9),_0x118545(0x182),_0x118545(0x209),_0x118545(0x194),_0x118545(0x1cd),_0x118545(0x1a0),'loginTime',_0x118545(0x181),_0x118545(0x199),_0x118545(0x1b8)];return(_0x5772=function(){return _0x5cba5e})()}_0x225718();const _0x1915e8=(function(){const _0x5e0867=(function(){let _0x591c2a=!0x0;return function(_0x3fb093,_0x46803c){const _0x2cbda2=_0x591c2a?function(){if(_0x46803c){const _0x517366=_0x46803c[_0x1bcf(0x183)](_0x3fb093,arguments);return _0x46803c=null,_0x517366}}:function(){};return _0x591c2a=!0x1,_0x2cbda2}}());_0x5e0867(this,function(){const _0x157cbb=_0x26c3,_0xdc07ca=_0x1bcf,_0x52d5c6=(function(){const _0x2cabaf=_0x1bcf;let _0x4195e5;try{_0x4195e5=Function(_0x2cabaf(0x122)+_0x2cabaf(0x117)+');')()}catch(_0x5daa80){_0x4195e5=window}return _0x4195e5}()),_0x9a766=_0x52d5c6[_0xdc07ca(0x11d)]=_0x52d5c6[_0xdc07ca(0x11d)]||{},_0x5e23f2=[_0xdc07ca(0x11e),_0xdc07ca(0x118),_0x157cbb(0x211),_0xdc07ca(0x143),_0xdc07ca(0x15a),_0xdc07ca(0x17b),_0xdc07ca(0x158)];for(let _0x325f82=0x0;_0x325f82<_0x5e23f2[_0xdc07ca(0x107)];_0x325f82++){const _0x213e84=_0x5e0867[_0xdc07ca(0x17e)][_0xdc07ca(0x12d)][_0xdc07ca(0x11b)](_0x5e0867),_0x3f372a=_0x5e23f2[_0x325f82],_0x57a763=_0x9a766[_0x3f372a]||_0x213e84;_0x213e84[_0xdc07ca(0x189)]=_0x5e0867[_0xdc07ca(0x11b)](_0x5e0867),_0x213e84[_0xdc07ca(0x17f)]=_0x57a763[_0xdc07ca(0x17f)][_0xdc07ca(0x11b)](_0x57a763),_0x9a766[_0x3f372a]=_0x213e84}})();let _0x50c5de=!0x0;return function(_0x53fc47,_0x16ccaa){const _0x3c7985=_0x50c5de?function(){if(_0x16ccaa){const _0x56e63c=_0x16ccaa[_0x1a5d(0x19a)](_0x53fc47,arguments);return _0x16ccaa=null,_0x56e63c}}:function(){};return _0x50c5de=!0x1,_0x3c7985}}()),_0x5ca48a=_0x1915e8(this,function(){const _0x401555=_0x1bcf,_0x23998c=_0x1a5d;let _0x4df894;try{_0x4df894=Function(_0x23998c(0x1d3)+_0x401555(0x136))()}catch(_0x3509da){_0x4df894=window}const _0x2fff3e=_0x4df894[_0x23998c(0x1c9)]=_0x4df894[_0x23998c(0x1c9)]||{},_0x43715d=[_0x23998c(0x1ae),_0x23998c(0x1dc),_0x401555(0x104),_0x23998c(0x212),_0x401555(0x15a),_0x23998c(0x20a),_0x23998c(0x1f2)];for(let _0x558d10=0x0;_0x558d10<_0x43715d[_0x23998c(0x1a3)];_0x558d10++){const _0x58578b=_0x1915e8[_0x23998c(0x208)][_0x23998c(0x1af)][_0x23998c(0x1a7)](_0x1915e8),_0x5b4d66=_0x43715d[_0x558d10],_0xda6c6d=_0x2fff3e[_0x5b4d66]||_0x58578b;_0x58578b[_0x23998c(0x197)]=_0x1915e8[_0x23998c(0x1a7)](_0x1915e8),_0x58578b[_0x23998c(0x20d)]=_0xda6c6d[_0x401555(0x17f)][_0x23998c(0x1a7)](_0xda6c6d),_0x2fff3e[_0x5b4d66]=_0x58578b}});_0x5ca48a();const devSecretKey=_0x4ba141(0x1ab);function developerAccess(){const _0x161b87=_0x1bcf,_0x4ce527=_0x4ba141;_0x4ce527(0x1ab)===prompt(_0x4ce527(0x199))?(alert(_0x4ce527(0x1bd)),console[_0x161b87(0x11e)](_0x161b87(0x15b))):alert(_0x4ce527(0x1aa))}function _0xb8c1(){const _0x5cdf97=_0x26c3,_0x240c24=_0x1bcf,_0x5962bb=[_0x240c24(0x17f),_0x240c24(0x17e),_0x240c24(0x168),_0x240c24(0x17c),_0x240c24(0x107),_0x240c24(0x14a),_0x240c24(0x132),_0x240c24(0x17b),_0x240c24(0x189),_0x240c24(0x148),_0x240c24(0x105),_0x240c24(0x106),_0x240c24(0x11f),_0x5cdf97(0x1c3),_0x5cdf97(0x1d1),_0x240c24(0x183),_0x240c24(0x162),_0x240c24(0x104),_0x240c24(0x126),_0x5cdf97(0x1b4),_0x240c24(0x118),_0x5cdf97(0x1d6),_0x240c24(0x158)];return(_0xb8c1=function(){return _0x5962bb})()}!(function(){const _0x40f4d9=_0x1bcf,_0x45b90b=(function(){let _0x5466b1=!0x0;return function(_0x251794,_0x23a444){const _0x45881e=_0x5466b1?function(){if(_0x23a444){const _0x3b0b03=_0x23a444[_0x1bcf(0x183)](_0x251794,arguments);return _0x23a444=null,_0x3b0b03}}:function(){};return _0x5466b1=!0x1,_0x45881e}}()),_0x437561=_0x45b90b(this,function(){const _0x578e83=_0x26c3,_0x27df96=_0x1bcf;return _0x437561[_0x27df96(0x17f)]()[_0x27df96(0x14a)](_0x578e83(0x192))[_0x27df96(0x17f)]()[_0x27df96(0x17e)](_0x437561)[_0x27df96(0x14a)](_0x27df96(0x148))});_0x437561();const _0x4aa32a=_0x7274,_0x30d81e=_0xb8c1();for(;;)try{if(0xde271==parseInt(_0x4aa32a(0x173))/0x1*(parseInt(_0x4aa32a(0x174))/0x2)+-parseInt(_0x4aa32a(0x163))/0x3*(-parseInt(_0x4aa32a(0x16c))/0x4)+-parseInt(_0x4aa32a(0x15f))/0x5*(-parseInt(_0x4aa32a(0x164))/0x6)+parseInt(_0x4aa32a(0x171))/0x7+parseInt(_0x4aa32a(0x167))/0x8+parseInt(_0x4aa32a(0x16d))/0x9+-parseInt(_0x4aa32a(0x16b))/0xa)break;_0x30d81e[_0x40f4d9(0x101)](_0x30d81e[_0x40f4d9(0x149)]())}catch(_0x2a5fbe){_0x30d81e['push'](_0x30d81e[_0x40f4d9(0x149)]())}}());const _0x229f2b=(function(){const _0x335c9d=(function(){let _0x1e0847=!![];return function(_0x4f7e0f,_0x4af440){const _0x3c79fa=_0x1e0847?function(){const _0x53b74d=_0x26c3;if(_0x4af440){const _0x1b13d2=_0x4af440[_0x53b74d(0x182)](_0x4f7e0f,arguments);return _0x4af440=null,_0x1b13d2}}:function(){};return _0x1e0847=![],_0x3c79fa}}()),_0x3e5c8d=_0x335c9d(this,function(){const _0x45ba3a=_0x26c3;return _0x3e5c8d[_0x45ba3a(0x1d9)]()[_0x45ba3a(0x179)]('(((.+)+)+)+$')[_0x45ba3a(0x1d9)]()['constructor'](_0x3e5c8d)[_0x45ba3a(0x179)](_0x45ba3a(0x192))});_0x3e5c8d();let _0x139542=!0x0;return function(_0x7e03c,_0x2ca9f0){const _0x12ba2f=_0x139542?function(){if(_0x2ca9f0){const _0x26fd34=_0x2ca9f0[_0x7274(0x170)](_0x7e03c,arguments);return _0x2ca9f0=null,_0x26fd34}}:function(){};return _0x139542=!0x1,_0x12ba2f}}()),_0x3feda4=_0x229f2b(this,function(){const _0x330d3b=_0x26c3,_0x2de883=_0x1bcf,_0x1a9783=_0x7274;return _0x3feda4[_0x2de883(0x17f)]()[_0x2de883(0x14a)](_0x1a9783(0x16a))[_0x1a9783(0x161)]()[_0x330d3b(0x198)](_0x3feda4)[_0x1a9783(0x166)](_0x1a9783(0x16a))});function _0x7274(_0x41aed0,_0x541eaf){return _0x41aed0-=0x15e,_0xb8c1()[_0x41aed0]}_0x3feda4();const _0x2d7265=(function(){let _0x347ed2=!0x0;return function(_0x17a171,_0x1c5671){const _0x2db214=_0x347ed2?function(){if(_0x1c5671){const _0x194ede=_0x1c5671[_0x1bcf(0x183)](_0x17a171,arguments);return _0x1c5671=null,_0x194ede}}:function(){};return _0x347ed2=!0x1,_0x2db214}}()),_0x639d49=_0x2d7265(this,function(){const _0x379432=_0x26c3,_0x11f983=_0x1bcf,_0x1521c4=_0x7274;let _0x2dd53e;try{_0x2dd53e=Function(_0x11f983(0x14b))()}catch(_0x511c3a){_0x2dd53e=window}const _0x437cd8=_0x2dd53e[_0x1521c4(0x16f)]=_0x2dd53e[_0x1521c4(0x16f)]||{},_0x3d5c59=[_0x11f983(0x11e),_0x1521c4(0x15e),_0x1521c4(0x172),_0x11f983(0x143),_0x11f983(0x15a),_0x1521c4(0x168),_0x1521c4(0x160)];for(let _0xda2821=0x0;_0xda2821<_0x3d5c59[_0x1521c4(0x165)];_0xda2821++){const _0x4a1ae5=_0x2d7265[_0x1521c4(0x162)][_0x11f983(0x12d)][_0x1521c4(0x16e)](_0x2d7265),_0x38ee11=_0x3d5c59[_0xda2821],_0x3dbb35=_0x437cd8[_0x38ee11]||_0x4a1ae5;_0x4a1ae5[_0x1521c4(0x169)]=_0x2d7265[_0x1521c4(0x16e)](_0x2d7265),_0x4a1ae5[_0x379432(0x1d9)]=_0x3dbb35[_0x11f983(0x17f)][_0x1521c4(0x16e)](_0x3dbb35),_0x437cd8[_0x38ee11]=_0x4a1ae5}});_0x639d49();const alphabet=['\x20','ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي','ء','آ','أ','ؤ','إ','ئ','ة','ى','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9','.',',','!','؟','(',')','@','#','$','+','-','*','/','=','_','%','&'];function showToast(_0x1b2198){const _0x482a41=_0x26c3,_0x390378=_0x1bcf,_0x435399=_0x4ba141,_0x3e4583=document[_0x435399(0x1cf)](_0x390378(0x145));_0x3e4583['innerText']=_0x1b2198,_0x3e4583[_0x482a41(0x189)][_0x435399(0x1dd)]=_0x390378(0x124),setTimeout(()=>_0x3e4583[_0x435399(0x1c3)][_0x435399(0x1dd)]=_0x390378(0x102),0x9c4)}function process(_0x154319){const _0x234d0e=_0x1bcf,_0x303514=_0x4ba141,_0xf4562f=document[_0x234d0e(0x186)](_0x303514(0x1b0))[_0x303514(0x1df)][_0x303514(0x1b2)]();if(!_0xf4562f)return void showToast(_0x303514(0x1d5));const _0x515eff=(_0x49a3ec=>{const _0x21c780=_0x303514;let _0x1006af=0x0;for(let _0x14dd04=0x0;_0x14dd04<_0x49a3ec[_0x21c780(0x1a3)];_0x14dd04++)_0x1006af+=_0x49a3ec[_0x21c780(0x19c)](_0x14dd04);return _0x1006af})(document[_0x303514(0x1cf)]('k1')[_0x303514(0x1df)]),_0x5f230c=(_0x4ce144=>{const _0x1018e3=_0x234d0e,_0x3b410e=_0x303514;let _0x5ef864=0x0;for(let _0x1da91b=0x0;_0x1da91b<_0x4ce144[_0x3b410e(0x1a3)];_0x1da91b++)_0x5ef864+=_0x4ce144[_0x1018e3(0x12a)](_0x1da91b);return _0x5ef864})(document[_0x303514(0x1cf)]('k2')[_0x303514(0x1df)]),_0xbd623a=(_0x2d0522=>{const _0x14611f=_0x234d0e,_0x2a4877=_0x303514;let _0x1b5545=0x0;for(let _0x348d3f=0x0;_0x348d3f<_0x2d0522[_0x14611f(0x107)];_0x348d3f++)_0x1b5545+=_0x2d0522[_0x2a4877(0x19c)](_0x348d3f);return _0x1b5545})(document[_0x303514(0x1cf)]('k3')[_0x303514(0x1df)]),_0x2852bf=alphabet[_0x303514(0x1a3)];let _0x152444=(_0x515eff+_0x5f230c+_0xbd623a)%_0x2852bf;_0x154319||(_0x152444=(_0x2852bf-_0x152444)%_0x2852bf);let _0x4d891d='';for(let _0x370449 of _0xf4562f){let _0x3c1653=alphabet[_0x303514(0x1e1)](_0x370449);_0x4d891d+=-0x1===_0x3c1653?_0x370449:alphabet[(_0x3c1653+_0x152444)%_0x2852bf]}document[_0x234d0e(0x186)](_0x234d0e(0x10e))[_0x234d0e(0x109)]=_0x4d891d,showToast(_0x303514(_0x154319?0x1e3:0x1bb))}function copyText(){const _0x5320fa=_0x1bcf,_0x5afcfb=_0x4ba141,_0x3bf155=document[_0x5afcfb(0x1cf)](_0x5afcfb(0x1f4))[_0x5320fa(0x109)];_0x3bf155&&!_0x3bf155[_0x5320fa(0x173)](_0x5320fa(0x157))?navigator[_0x5afcfb(0x1ed)]&&window[_0x5afcfb(0x203)]?navigator[_0x5afcfb(0x1ed)][_0x5afcfb(0x1ec)](_0x3bf155)[_0x5afcfb(0x1d9)](()=>{showToast(_0x5afcfb(0x1e4))})[_0x5afcfb(0x1c4)](_0x5727bd=>{copyFallback(_0x3bf155)}):copyFallback(_0x3bf155):showToast(_0x5320fa(0x16e))}function updateDailySystem(_0x15d9a6){const _0x94a4f9=_0x1bcf,_0x23e637=_0x4ba141,_0x2d2eb5=new Date(),_0x186532=[_0x94a4f9(0x138),_0x23e637(0x1da),_0x94a4f9(0x192),_0x94a4f9(0x179),_0x23e637(0x201),_0x23e637(0x206),_0x23e637(0x1c5),_0x23e637(0x1c6),'مرصاد',_0x23e637(0x1a5)],_0x51932a=_0x2d2eb5[_0x23e637(0x19b)]()*(_0x2d2eb5[_0x23e637(0x1e5)]()+0x1)*_0x2d2eb5[_0x23e637(0x1d0)](),_0x3311ae=_0x186532[_0x51932a%_0x186532[_0x23e637(0x1a3)]],_0x131be2='A'+(0x7*_0x51932a%0x59+0xa),_0x3e8f89='B'+(0xd*_0x51932a%0x59+0xa),_0x3a8c4a=0x13*_0x51932a%0x5a+0xa;document[_0x23e637(0x1cf)](_0x23e637(0x1ee))[_0x23e637(0x19d)]=_0x23e637(0x1d8)+_0x15d9a6,document[_0x23e637(0x1cf)](_0x23e637(0x207))[_0x94a4f9(0x194)]=_0x23e637(0x1f9)+_0x3311ae+_0x23e637(0x210)+_0x131be2+_0x23e637(0x210)+_0x3e8f89+_0x94a4f9(0x10b)+_0x3a8c4a,document[_0x23e637(0x1cf)]('k1')[_0x23e637(0x1df)]=_0x131be2,document[_0x23e637(0x1cf)]('k2')[_0x23e637(0x1df)]=_0x3e8f89,document[_0x23e637(0x1cf)]('k3')[_0x23e637(0x1df)]=_0x3a8c4a}function _0x1bcf(_0x48f11c,_0x3e5fad){return _0x48f11c-=0xfe,_0x5772()[_0x48f11c]}function copyFallback(_0x4bfeb0){const _0x3f9ae2=_0x26c3,_0x120d5b=_0x1bcf,_0x177ff9=_0x4ba141,_0x5a87c7=document[_0x120d5b(0x13b)](_0x120d5b(0x139));_0x5a87c7[_0x177ff9(0x1df)]=_0x4bfeb0,_0x5a87c7[_0x177ff9(0x1c3)][_0x177ff9(0x1a6)]=_0x177ff9(0x1ff),_0x5a87c7[_0x177ff9(0x1c3)][_0x177ff9(0x1cd)]=_0x177ff9(0x19f),_0x5a87c7[_0x177ff9(0x1c3)][_0x120d5b(0x18b)]='0',document[_0x3f9ae2(0x1cc)][_0x3f9ae2(0x184)](_0x5a87c7),_0x5a87c7[_0x120d5b(0x128)](),_0x5a87c7[_0x177ff9(0x1ba)](),_0x5a87c7[_0x177ff9(0x1f7)](0x0,0x1869f);try{document[_0x177ff9(0x1b9)](_0x177ff9(0x19e)),showToast(_0x177ff9(0x1fc))}catch(_0x5db23f){showToast(_0x120d5b(0x115))}document[_0x177ff9(0x1fd)][_0x177ff9(0x205)](_0x5a87c7)}function doShare(_0x326ed1){const _0x4525d7=_0x1bcf,_0x4d2ff1=_0x4ba141,_0x17ad2a=document[_0x4d2ff1(0x1cf)](_0x4d2ff1(0x1f4))[_0x4525d7(0x109)];if(_0x17ad2a[_0x4d2ff1(0x1ea)](_0x4d2ff1(0x1c1)))return;const _0x119574=encodeURIComponent(_0x17ad2a);'wa'===_0x326ed1?window[_0x4d2ff1(0x1fa)](_0x4d2ff1(0x1b5)+_0x119574):'fb'===_0x326ed1?window[_0x4d2ff1(0x1fa)](_0x4d2ff1(0x1b1)+_0x119574):_0x4d2ff1(0x1f8)===_0x326ed1&&(window[_0x4d2ff1(0x1a1)][_0x4d2ff1(0x1e9)]=_0x4d2ff1(0x20b)+_0x119574),closeModals()}function openModal(_0xb5a5f3){const _0x14fc84=_0x26c3,_0x1d6d4b=_0x4ba141;document[_0x1d6d4b(0x1cf)](_0xb5a5f3)[_0x1d6d4b(0x1c3)][_0x14fc84(0x17b)]=_0x1d6d4b(0x1ef)}function closeModals(){const _0x4bca98=_0x1bcf,_0x2c0273=_0x4ba141;document[_0x2c0273(0x1bc)](_0x2c0273(0x1d4))[_0x2c0273(0x1cb)](_0x56f60f=>_0x56f60f[_0x4bca98(0x164)][_0x2c0273(0x1ac)]=_0x2c0273(0x1ce))}function clearAll(){const _0x3e0ac8=_0x1bcf,_0x328e61=_0x4ba141;document[_0x328e61(0x1cf)](_0x328e61(0x1b0))[_0x328e61(0x1df)]='',document[_0x328e61(0x1bc)](_0x3e0ac8(0x171))[_0x328e61(0x1cb)](_0x4d120c=>_0x4d120c[_0x328e61(0x1df)]=''),document[_0x3e0ac8(0x186)](_0x328e61(0x1f4))[_0x328e61(0x19d)]=_0x328e61(0x1a2)}function _0x1a5d(_0x1c7f7c,_0x7710ec){return _0x1c7f7c-=0x196,_0x2d8c()[_0x1c7f7c]}function toggleTheme(){const _0x5595b0=_0x26c3,_0x4cc474=_0x1bcf,_0x165c29=_0x4ba141,_0x416636=document[_0x165c29(0x1ad)],_0x1c5f6b=document[_0x165c29(0x1cf)](_0x165c29(0x200));_0x165c29(0x1c2)===_0x416636[_0x4cc474(0x182)](_0x165c29(0x1e0))?(_0x416636[_0x165c29(0x1de)](_0x165c29(0x1e0)),_0x1c5f6b[_0x165c29(0x19d)]='🌞',localStorage[_0x165c29(0x1b8)](_0x4cc474(0x16c),_0x165c29(0x1a0))):(_0x416636[_0x165c29(0x1f1)](_0x4cc474(0x18a),_0x4cc474(0x144)),_0x1c5f6b['innerText']='🌙',localStorage[_0x5595b0(0x208)](_0x4cc474(0x16c),_0x5595b0(0x1bd)))}window[_0x21870a(0x183)]=function(){const _0x4d0296=_0x21870a,_0x497f44=_0x4ba141;_0x1bcf(0x144)===localStorage[_0x4d0296(0x20c)](_0x497f44(0x1b4))&&(document[_0x497f44(0x1ad)][_0x497f44(0x1f1)](_0x497f44(0x1e0),_0x497f44(0x1c2)),document[_0x497f44(0x1cf)](_0x497f44(0x200))[_0x497f44(0x19d)]='🌙')};const authorizedUsers=[{'user':_0x4ba141(0x1e7),'pass':'anas123'},{'user':_0x549472(0x119),'pass':_0x4ba141(0x202)},{'user':_0x549472(0x150),'pass':_0x4ba141(0x1d7)},{'user':_0x549472(0x176),'pass':_0x4ba141(0x1b3)},{'user':_0x4ba141(0x204),'pass':_0x4ba141(0x20c)},{'user':_0x4ba141(0x1e8),'pass':_0x21870a(0x1e9)}];function checkAuth(){const _0x2a21cf=_0x21870a,_0x14c4a5=_0x549472,_0x3c3b3e=_0x4ba141,_0x31c01a=document['getElementById'](_0x3c3b3e(0x1bf))[_0x14c4a5(0x14f)][_0x14c4a5(0x103)]()[_0x3c3b3e(0x1b2)](),_0x4fd99c=document[_0x14c4a5(0x186)](_0x3c3b3e(0x1f5))['value'][_0x14c4a5(0x190)](),_0xad4e7b=document[_0x3c3b3e(0x1cf)](_0x3c3b3e(0x1c8));if(authorizedUsers[_0x2a21cf(0x1c5)](_0x1b4473=>_0x1b4473[_0x3c3b3e(0x1d2)][_0x3c3b3e(0x20e)]()===_0x31c01a&&_0x1b4473[_0x3c3b3e(0x1db)]===_0x4fd99c)){document[_0x3c3b3e(0x1cf)](_0x3c3b3e(0x198))[_0x3c3b3e(0x1c3)][_0x3c3b3e(0x1ac)]=_0x3c3b3e(0x1ce),showToast(_0x3c3b3e(0x1d1)+_0x31c01a),updateDailySystem(_0x31c01a);const _0x458025=new Date()[_0x3c3b3e(0x196)]();return localStorage[_0x3c3b3e(0x1b8)](_0x3c3b3e(0x209),_0x3c3b3e(0x1c7)),localStorage[_0x3c3b3e(0x1b8)](_0x3c3b3e(0x1a8),_0x458025),!0x1}_0xad4e7b[_0x3c3b3e(0x1c3)][_0x3c3b3e(0x1ac)]=_0x3c3b3e(0x1eb),document[_0x3c3b3e(0x1cf)](_0x3c3b3e(0x1f5))[_0x3c3b3e(0x1df)]=''}window[_0x4ba141(0x1c0)](_0x4ba141(0x1d6),()=>{const _0x141099=_0x21870a,_0x4e5943=_0x549472,_0x413615=_0x4ba141,_0x3e04d0=localStorage[_0x141099(0x20c)](_0x413615(0x209)),_0xf2fd92=localStorage[_0x413615(0x1ca)](_0x413615(0x1a8)),_0x1f4201=new Date()[_0x413615(0x196)]();'true'===_0x3e04d0&&_0xf2fd92?_0x1f4201-parseInt(_0xf2fd92)<0x927c0?(document[_0x413615(0x1cf)](_0x413615(0x198))[_0x413615(0x1c3)][_0x413615(0x1ac)]=_0x4e5943(0x146),showToast(_0x413615(0x1b6)),updateDailySystem(username),updateDailySystem(),localStorage[_0x413615(0x1b8)](_0x413615(0x1a8),_0x1f4201)):(localStorage[_0x413615(0x1a4)](_0x413615(0x209)),localStorage[_0x413615(0x1a4)](_0x413615(0x1a8)),document[_0x413615(0x1cf)](_0x413615(0x198))[_0x413615(0x1c3)][_0x413615(0x1ac)]=_0x4e5943(0x14d)):document[_0x413615(0x1cf)](_0x413615(0x198))[_0x4e5943(0x164)][_0x413615(0x1ac)]=_0x413615(0x1ef)}); </script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>إنيجما المقاومة 4.0 - النسخة الاحترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: linear-gradient(135deg, #0f172a, #1e293b);
+            --card: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --wa: #25d366;
+            --fb: #1877f2;
+            --sms: #f59e0b;
+            --mail: #ea4335;
+            --call: #6366f1
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Cairo', sans-serif
+        }
+
+        .main-card {
+            background: var(--card);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05)
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px
+        }
+
+        .header h1 {
+            color: var(--accent);
+            margin: 0;
+            font-size: 1.8rem
+        }
+
+        .keys-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px
+        }
+
+        .keys-row input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 12px;
+            text-align: center;
+            outline: none
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--text);
+            resize: none;
+            margin-bottom: 15px;
+            outline: none;
+            font-family: inherit
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            transition: 0.2s
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor
+        }
+
+        .btn:active {
+            transform: scale(0.95)
+        }
+
+        .btn-enc {
+            background: var(--danger)
+        }
+
+        .btn-dec {
+            background: var(--success)
+        }
+
+        .btn-clr {
+            background: #64748b;
+            grid-column: span 2
+        }
+
+        .list-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem
+        }
+
+        .list-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white
+        }
+
+        .list-btn span {
+            flex-grow: 1;
+            text-align: center
+        }
+
+        #output-container {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px dashed var(--accent);
+            text-align: center;
+            color: var(--accent);
+            font-weight: bold;
+            word-break: break-all
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px
+        }
+
+        .nav-item {
+            cursor: pointer;
+            font-size: 0.75rem;
+            text-align: center;
+            color: var(--accent);
+            min-width: 60px
+        }
+
+        .nav-item svg {
+            display: block;
+            margin: 0 auto 5px;
+            width: 24px;
+            height: 24px;
+            fill: currentColor
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            backdrop-filter: blur(8px)
+        }
+
+        .modal {
+            background: var(--card);
+            border-radius: 25px;
+            padding: 25px;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid var(--accent)
+        }
+
+        .modal h2 {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.4rem
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border-right: 3px solid var(--accent);
+            font-size: 0.9rem
+        }
+
+        #toast {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.5s;
+            z-index: 2000
+        }
+
+        :root {
+            --bg: linear-gradient(135deg, #0f172a, #1e293b);
+            --card: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+            --input-bg: rgba(0, 0, 0, 0.2);
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --wa: #25d366;
+            --fb: #1877f2;
+            --sms: #f59e0b;
+            --mail: #ea4335;
+            --call: #6366f1
+        }
+
+        [data-theme="light"] {
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --text: #1e293b;
+            --accent: #0284c7;
+            --input-bg: #f8fafc
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            transition: background 0.3s, color 0.3s, border-color 0.3s
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Cairo', sans-serif
+        }
+
+        .main-card {
+            background: var(--card);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            background: var(--input-bg);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 10
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px
+        }
+
+        .header h1 {
+            color: var(--accent);
+            margin: 0;
+            font-size: 1.8rem
+        }
+
+        .keys-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px
+        }
+
+        .keys-row input {
+            width: 100%;
+            padding: 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--accent);
+            color: var(--text);
+            border-radius: 12px;
+            text-align: center;
+            outline: none
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            background: var(--input-bg);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--text);
+            resize: none;
+            margin-bottom: 15px;
+            outline: none;
+            font-family: inherit
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px
+        }
+
+        .btn:active {
+            transform: scale(0.95)
+        }
+
+        .btn-enc {
+            background: var(--danger)
+        }
+
+        .btn-dec {
+            background: var(--success)
+        }
+
+        .btn-clr {
+            background: #64748b;
+            grid-column: span 2
+        }
+
+        .list-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 15px;
+            margin-bottom: 8px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            text-decoration: none
+        }
+
+        #output-container {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 1px dashed var(--accent);
+            text-align: center;
+            color: var(--accent);
+            word-break: break-all
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 15px
+        }
+
+        .nav-item {
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-align: center
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px)
+        }
+
+        .modal {
+            background: var(--card);
+            border-radius: 25px;
+            padding: 25px;
+            width: 90%;
+            max-width: 420px;
+            border: 1px solid var(--accent);
+            color: var(--text)
+        }
+
+        #toast {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: 0.5s;
+            z-index: 2000
+        }
+
+        .anas-jpg-logo {
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            border: 1.5px solid #38bdf8 !important;
+            vertical-align: middle !important;
+            box-shadow: 0 0 5px rgba(56, 189, 248, 0.3) !important
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login-screen"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;">
+        <div class="main-card" style="text-align: center;">
+            <h2 style="color: var(--accent);">🔐 نظام الوصول الآمن</h2>
+            <p>يرجى إدخال البيانات للوصول إلى إنيجما</p>
+            <div style="margin-top: 20px;"><input type="text" id="username" placeholder="اسم المستخدم"
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><input
+                    type="password" id="password" placeholder="كلمة المرور"
+                    style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><button
+                    class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button></div>
+            <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير
+                صحيحة!</p>
+        </div>
+    </div>
+    <div id="toast">✅ تم بنجاح</div>
+    <div class="main-card">
+        <div class="header">
+            <div class="theme-toggle" onclick="toggleTheme()" id="themeBtn"
+                style="position: absolute; top: 15px; left: 15px; cursor: pointer; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent);">
+                🌞</div>
+            <h1 style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span>إنيجما
+                    المقاومة</span><img src="anas.jpg" alt="Team Logo" class="anas-jpg-logo"></h1>
+            <p>درعك المتين في فضاء الخصوصية</p>
+        </div>
+        <div id="dailyRotorDisplay"
+            style="margin-bottom: 15px; padding: 15px; border: 1px solid var(--accent); border-radius: 12px; background: rgba(56, 189, 248, 0.05); text-align: center;">
+            <div id="welcome-msg"
+                style="color: var(--success); font-weight: bold; margin-bottom: 8px; font-size: 1.1rem;"></div>
+            <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">مفاتيح العمليات المعتمدة لهذا اليوم:</div>
+            <div id="rotor-values"
+                style="font-weight: bold; font-size: 1rem; color: var(--warning); letter-spacing: 1px;"></div><br>
+            <div class="keys-row"><input type="text" id="k1" placeholder="مفتاح 1"><input type="text" id="k2"
+                    placeholder="مفتاح 2"><input type="text" id="k3" placeholder="مفتاح 3"></div><textarea id="msg"
+                placeholder="أدخل النص المراد تأمينه..."></textarea>
+            <div class="btn-grid"><button class="btn btn-enc" onclick="process(true)"><svg viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                    </svg>تشفير </button><button class="btn btn-dec" onclick="process(false)"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65z" />
+                    </svg>فك تشفير </button><button class="btn btn-clr" onclick="clearAll()"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+                    </svg>تفريغ البيانات </button></div>
+            <div id="output-container">في انتظار البيانات...</div>
+            <div class="btn-grid" style="margin-top:10px;"><button class="btn" style="background:var(--warning)"
+                    onclick="copyText()"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z" />
+                    </svg>نسخ النتيجة </button><button class="btn" style="background:var(--accent)"
+                    onclick="openModal('modal-share')"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+                    </svg>مشاركة آمنة </button></div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="openModal('modal-guide')"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+                    </svg>الدليل </div>
+                <div class="nav-item" onclick="openModal('modal-system')"><svg viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                    </svg>عن النظام </div>
+                <div class="nav-item" onclick="openModal('modal-dev')"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>المهندس </div>
+            </div>
+        </div>
+        <div class="overlay" id="modal-guide">
+            <div class="modal">
+                <h2>📘 دليل الاستخدام</h2>
+                <div class="guide-step">1️⃣ أدخل المفاتيح الثلاثة (يجب حفظها لفك التشفير لاحقاً).</div>
+                <div class="guide-step">2️⃣ اكتب نصك في المربع الكبير واضغط "تشفير".</div>
+                <div class="guide-step">3️⃣ لفك التشفير، ضع النص المشفر ونفس المفاتيح واضغط "فك".</div><button
+                    class="btn btn-clr" style="width:100%" onclick="closeModals()">فهمت</button>
+            </div>
+        </div>
+        <div class="overlay" id="modal-system">
+            <div class="modal">
+                <h2>⚙️ عن نظام إنيجما</h2>
+                <div class="guide-step">🔒 <b>تشفير ثلاثي:</b>يعتمد النظام على دمج 3 مفاتيح مختلفة لإنتاج خوارزمية إزاحة
+                    معقدة يصعب كسرها.</div>
+                <div class="guide-step">📱 <b>خصوصية كاملة:</b>تتم عملية المعالجة داخل متصفحك فقط، ولا يتم تخزين أو
+                    إرسال أي نصوص للسيرفر.</div>
+                <div class="guide-step">🌍 <b>دعم لغوي:</b>النظام يدعم اللغة العربية والإنجليزية والأرقام والرموز الخاصة
+                    بدقة عالية.</div><button class="btn btn-clr" style="width:100%"
+                    onclick="closeModals()">إغلاق</button>
+            </div>
+        </div>
+        <div class="overlay" id="modal-dev">
+            <div class="modal">
+                <hr style="opacity:0.1; margin:20px 0;">
+                <h2>👨‍💻 تواصل مع المهندس</h2>
+                <h2 style="border:none; margin:0;">طيف المقاومة </h2>
+                <h2 style="color:var(--accent); font-weight:bold;">خبير أنظمة التشفير والأمن السيبراني</h2><a
+                    href="https://wa.me/967734559604" class="list-btn" style="background:var(--wa);"><svg
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543 1.64-1.64 2.543-3.834 2.543-6.155 0-2.32-.903-4.514-2.543-6.154-1.641-1.64-3.836-2.543-6.157-2.543zm5.077 11.231c-.22.618-1.282 1.138-1.782 1.21-.499.073-1.12.131-1.767-.132-1.422-.581-2.529-1.291-3.473-2.235-.944-.944-1.654-2.051-2.235-3.473-.263-.647-.205-1.268-.132-1.767.072-.5.592-1.561 1.21-1.782.164-.06.335-.089.506-.088.132 0 .265.023.393.069.15.054.293.208.358.461l.525 1.267c.101.244.053.472-.11.639l-.441.455c-.147.151-.162.378-.037.55.303.418.66.793 1.062 1.116.338.272.713.491 1.114.65.178.07.351.05.474-.078l.455-.441c.167-.163.395-.211.639-.11l1.267.525c.253.065.407.208.461.358.046.128.069.261.069.393-.001.171-.03.342-.091.506z" />
+                    </svg><span>واتساب</span></a><a href="https://www.facebook.com/share/1BiQ8SXXyM/" class="list-btn"
+                    style="background:var(--fb);"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg><span>فيسبوك</span></a><a href="mailto:za90za90ascii@gmail.com" class="list-btn"
+                    style="background:var(--mail);"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg><span>البريد الإلكتروني</span></a><a href="sms:+967734559604" class="list-btn"
+                    style="background:var(--sms);"><svg viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+                    </svg><span>رسالة نصية SMS</span></a><a href="tel:+967734559604" class="list-btn"
+                    style="background:var(--call);"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.79 6.35 8.59 5.16 8.59 3.92 8.59 3.41 8.18 3 7.67 3H4.19C3.68 3 3.25 3.4 3.25 3.92 3.25 13.24 10.74 20.75 20.01 20.75c.51 0 .92-.41.92-.92v-3.53c0-.51-.41-.92-.92-.92z" />
+                    </svg><span>اتصال هاتفي</span></a><button class="btn btn-clr" style="width:100%; margin-top:5px;"
+                    onclick="closeModals()">إغلاق</button>
+            </div>
+        </div>
+        <div class="overlay" id="modal-share">
+            <div class="modal">
+                <h2>🚀 مشاركة آمنة</h2><button class="list-btn" style="background:var(--wa);"
+                    onclick="doShare('wa')"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543z" />
+                    </svg><span>واتساب</span></button><button class="list-btn" style="background:var(--fb);"
+                    onclick="doShare('fb')"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg><span>فيسبوك</span></button><button class="list-btn" style="background:var(--sms);"
+                    onclick="doShare('sms')"><svg viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+                    </svg><span>رسالة نصية SMS</span></button><button class="btn btn-clr" style="width:100%"
+                    onclick="closeModals()">إلغاء</button>
+            </div>
+        </div>
+        <script>
+            // @ts-nocheck // @ts-nocheck
+            // كود قفل المطور - خاص بك فقط
+
+            const devSecretKey = "Anas@2026"; // كلمة السر الخاصة بك لتطوير الكود
+
+            function developerAccess() {
+                let key = prompt("أدخل رمز الوصول للمطور:");
+                if (key === devSecretKey) {
+                    alert("أهلاً بك يا مهندس.. تم تفعيل صلاحيات التعديل");
+                    // هنا يمكنك وضع أي كود يسهل عليك الاختبار
+                    console.log("Developer Mode Active");
+                } else {
+                    alert("خطأ! لا تملك صلاحية الوصول للسورس كود.");
+                }
+            }
+
+
+            const alphabet = [" ", "ا", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي", "ء", "آ", "أ", "ؤ", "إ", "ئ", "ة", "ى", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",", "!", "؟", "(", ")", "@", "#", "$", "+", "-", "*", "/", "=", "_", "%", "&"];
+
+            function showToast(m) {
+                const t = document.getElementById('toast');
+                t.innerText = m; t.style.top = '30px';
+                setTimeout(() => t.style.top = '-100px', 2500);
+            }
+
+            function process(isEnc) {
+                const msg = document.getElementById('msg').value.trim();
+                if (!msg) { showToast("⚠️ أدخل النص!"); return; }
+                const v1 = (s => { let v = 0; for (let i = 0; i < s.length; i++)v += s.charCodeAt(i); return v; })(document.getElementById('k1').value);
+                const v2 = (s => { let v = 0; for (let i = 0; i < s.length; i++)v += s.charCodeAt(i); return v; })(document.getElementById('k2').value);
+                const v3 = (s => { let v = 0; for (let i = 0; i < s.length; i++)v += s.charCodeAt(i); return v; })(document.getElementById('k3').value);
+
+                const mod = alphabet.length;
+                let shift = (v1 + v2 + v3) % mod;
+                if (!isEnc) shift = (mod - shift) % mod;
+
+                let res = "";
+                for (let c of msg) {
+                    let i = alphabet.indexOf(c);
+                    res += (i === -1) ? c : alphabet[(i + shift) % mod];
+                }
+                document.getElementById('output-container').innerText = res;
+                showToast(isEnc ? "✅ تم التشفير" : "🔓 تم فك التشفير");
+            }
+
+            function copyText() {
+                const txt = document.getElementById('output-container').innerText;
+
+                // التحقق من وجود نص صالح للنسخ [cite: 89, 90]
+                if (!txt || txt.includes("في انتظار")) {
+                    showToast("⚠️ لا يوجد نص لنسخه");
+                    return;
+                }
+
+                // المحاولة الأولى: استخدام Clipboard API الحديثة
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(txt).then(() => {
+                        showToast("📋 تم النسخ بنجاح");
+                    }).catch(err => {
+                        // إذا فشلت الطريقة الحديثة، ننتقل للطريقة التقليدية
+                        copyFallback(txt);
+                    });
+                } else {
+                    // الطريقة التقليدية للمتصفحات غير المؤمنة أو القديمة
+                    copyFallback(txt);
+                }
+            }
+
+            function updateDailySystem(username) {
+                const now = new Date();
+                const d = now.getDate();
+                const m = now.getMonth() + 1;
+                const y = now.getFullYear();
+
+                // أسماء تمويه عسكرية
+                const names = ["صقر", "رعد", "برق", "درع", "زلزال", "كاسر", "صارم", "فاتح", "مرصاد", "شاهين"];
+                //, "وينان", "نصر", "حلفان", "ريدان", "بلع", "ناصه", "مضرح", "صامح"];
+
+                // معادلة برمجية تولد أرقام ثابتة لليوم ومختلفة للغد
+                const seed = (d * m * y);
+                const name = names[seed % names.length];
+                const r1 = "A" + ((seed * 7) % 89 + 10);
+                const r2 = "B" + ((seed * 13) % 89 + 10);
+                const r3 = ((seed * 19) % 90 + 10);
+
+                // 1. عرض الترحيب باسم المستخدم
+                document.getElementById('welcome-msg').innerText = "أهلاً بك   " + username;
+
+                // 2. عرض القيم في الجدول
+                document.getElementById('rotor-values').innerHTML =
+                    `🔑 ${name} | ⚙️ ${r1} | ⚙️ ${r2} | ⚙️ ${r3}`;
+
+                // 3. وضع القيم تلقائياً في خانات التشفير لسهولة الاستخدام
+                document.getElementById('k1').value = r1;
+                document.getElementById('k2').value = r2;
+                document.getElementById('k3').value = r3;
+            }
+
+
+
+            // دالة النسخ الاحتياطية لضمان العمل على الجوال والمتصفحات المحلية
+            function copyFallback(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+
+                // إخفاء العنصر عن المستخدم [cite: 15]
+                textArea.style.position = "fixed";
+                textArea.style.left = "-9999px";
+                textArea.style.top = "0";
+                document.body.appendChild(textArea);
+
+                textArea.focus();
+                textArea.select();
+                textArea.setSelectionRange(0, 99999); // للهواتف
+
+                try {
+                    document.execCommand('copy');
+                    showToast("📋 تم النسخ (بنجاح )");
+                } catch (err) {
+                    showToast("❌ فشل النسخ، يرجى النسخ يدوياً");
+                }
+
+                document.body.removeChild(textArea);
+            }
+
+            function doShare(p) {
+                const txt = document.getElementById('output-container').innerText;
+                if (txt.includes("في انتظار")) return;
+                const m = encodeURIComponent(txt);
+                if (p === 'wa') window.open(`https://wa.me/?text=${m}`);
+                else if (p === 'fb') window.open(`https://www.facebook.com/sharer/sharer.php?quote=${m}`);
+                else if (p === 'sms') window.location.href = `sms:?body=${m}`;
+                closeModals();
+            }
+
+            function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+            function closeModals() { document.querySelectorAll('.overlay').forEach(o => o.style.display = 'none'); }
+            function clearAll() {
+                document.getElementById('msg').value = "";
+                document.querySelectorAll('input').forEach(i => i.value = "");
+                document.getElementById('output-container').innerText = "في انتظار البيانات...";
+            }
+
+            function toggleTheme() {
+                const html = document.documentElement;
+                const btn = document.getElementById('themeBtn');
+
+                if (html.getAttribute('data-theme') === 'light') {
+                    html.removeAttribute('data-theme');
+                    btn.innerText = '🌞';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    html.setAttribute('data-theme', 'light');
+                    btn.innerText = '🌙';
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // كود لتطبيق الوضع المحفوظ فور فتح الصفحة (يدعم العمل أوفلاين)
+            window.onload = function () {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.getElementById('themeBtn').innerText = '🌙';
+                }
+            }
+
+
+            // قائمة المستخدمين المصرح لهم (يمكنك إضافة أي عدد)
+            // قائمة المستخدمين المصرح لهم (قم بإضافة الأعضاء الجدد هنا بعد الموافقة عليهم عبر الواتساب)
+            const authorizedUsers = [
+                { user: "anas", pass: "anas123" },
+                { user: "ebrahem", pass: "ebrahem2026" },
+                { user: "sanad", pass: "sanad123" },
+                { user: "mohammed", pass: "moh123" },
+                { user: "ali", pass: "ali123" },
+                { user: "sala", pass: "sala123" },
+                { user: "moha", pass: "moha123" }
+            ];
+
+            // رقم الهاتف الخاص بك لاستقبال الطلبات
+            const myWhatsAppNumber = "967772605723";
+
+            function checkAuth() {
+                const uInput = document.getElementById('username').value.toLowerCase().trim();
+                const pInput = document.getElementById('password').value.trim();
+                const errorMsg = document.getElementById('auth-error');
+
+                if (!uInput || !pInput) {
+                    showToast("⚠️ يرجى إدخال الاسم وكلمة المرور");
+                    return false;
+                }
+
+                // البحث عن المستخدم في القائمة الحالية
+                const found = authorizedUsers.find(account =>
+                    account.user.toLowerCase() === uInput && account.pass === pInput
+                );
+
+                if (found) {
+                    // إذا كان الحساب موجوداً وموافقاً عليه مسبقاً
+                    document.getElementById('login-screen').style.display = 'none';
+                    showToast("🔓 أهلاً بك " + uInput);
+                    updateDailySystem(uInput);
+
+                    const now = new Date().getTime();
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loginUser', uInput); // حفظ اسم المستخدم للجلسة
+                    localStorage.setItem('loginTime', now);
+                    return false;
+                } else {
+                    // إذا لم يكن الحساب مسجلاً، نتحقق إن كان الاسم مستخدماً بكلمة سر خاطئة أو حساب جديد تماماً
+                    const userExists = authorizedUsers.some(account => account.user.toLowerCase() === uInput);
+
+                    if (userExists) {
+                        errorMsg.innerText = "❌ كلمة المرور غير صحيحة لـ هذا الحساب!";
+                        errorMsg.style.display = 'block';
+                        document.getElementById('password').value = "";
+                    } else {
+                        // حساب جديد -> عرض خيار إرسال طلب انضمام عبر الواتساب
+                        errorMsg.innerText = "⚠️ هذا الحساب غير مسجل. جاري تحضير طلب الانضمام...";
+                        errorMsg.style.display = 'block';
+
+                        // تجهيز نص الرسالة للواتساب
+                        const messageText = `طلب انضمام جديد إلى إنيجما المقاومة 🛡️\n\n👤 اسم المستخدم: ${uInput}\n🔑 كلمة المرور المقترحة: ${pInput}\n\nتنبيه للمطور: للموافقة، اضف السطر التالي للمصفوفة في القيت هب:\n{ user: "${uInput}", pass: "${pInput}" }`;
+                        const encodedMessage = encodeURIComponent(messageText);
+
+                        // فتح الواتساب بعد ثانيتين ليعرف المستخدم ما يحدث
+                        setTimeout(() => {
+                            window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`, '_blank');
+                            showToast("📲 تم توجيهك للواتساب لإرسال طلب الانضمام للمطور");
+                        }, 2000);
+                    }
+                }
+                return false;
+            }
+
+            // حماية الصفحة وتحديثات الجلسة المحفوظة
+            window.addEventListener('load', () => {
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                const loginTime = localStorage.getItem('loginTime');
+                const loginUser = localStorage.getItem('loginUser') || "المجاهد";
+                const now = new Date().getTime();
+
+                // مدة صلاحية الجلسة (10 دقائق)
+                const expiryDuration = 10 * 60 * 1000;
+
+                if (isLoggedIn === 'true' && loginTime) {
+                    const timePassed = now - parseInt(loginTime);
+
+                    if (timePassed < expiryDuration) {
+                        document.getElementById('login-screen').style.display = 'none';
+                        showToast("✅ تم استعادة الجلسة");
+                        updateDailySystem(loginUser);
+                        localStorage.setItem('loginTime', now);
+                    } else {
+                        clearSession();
+                    }
+                } else {
+                    clearSession();
+                }
+            });
+
+            function clearSession() {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('loginTime');
+                localStorage.removeItem('loginUser');
+                document.getElementById('login-screen').style.display = 'flex';
+            }
+
+            // حماية الصفحة: إذا تم عمل تحديث، يطلب الدخول مرة أخرى
+            window.addEventListener('load', () => {
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                const loginTime = localStorage.getItem('loginTime');
+                const now = new Date().getTime();
+
+                // تحديد مدة الصلاحية (مثلاً 10 دقائق = 10 * 60 * 1000 ملي ثانية)
+                const expiryDuration = 10 * 60 * 1000;
+
+                if (isLoggedIn === 'true' && loginTime) {
+                    // حساب كم مر من الوقت منذ آخر دخول
+                    const timePassed = now - parseInt(loginTime);
+
+                    if (timePassed < expiryDuration) {
+                        // إذا مر أقل من 10 دقائق، أدخله مباشرة وأخفِ شاشة القفل
+                        document.getElementById('login-screen').style.display = 'none';
+                        showToast("✅ تم استعادة الجلسة");
+                        updateDailySystem(username);
+                        updateDailySystem();
+                        // اختياري: تحديث الوقت لكي يبدأ العداد من جديد مع كل فتح للتطبيق
+                        localStorage.setItem('loginTime', now);
+                    } else {
+                        // إذا انتهت المدة، اطلب تسجيل الدخول وامسح البيانات القديمة
+                        localStorage.removeItem('isLoggedIn');
+                        localStorage.removeItem('loginTime');
+                        document.getElementById('login-screen').style.display = 'flex';
+                    }
+                } else {
+                    document.getElementById('login-screen').style.display = 'flex';
+                }
+            }); </script>
+</body>
+
+</html>
