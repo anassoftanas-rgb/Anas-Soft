@@ -504,6 +504,15 @@
                     class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button></div>
             <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير
                 صحيحة!</p>
+
+            <hr style="margin: 20px 0; border: 1px solid #ccc;">
+
+            <h3>تقديم طلب جديد 📝</h3>
+            <input type="text" id="req-username" placeholder="الاسم المطلوب">
+            <input type="password" id="req-password" placeholder="كلمة المرور المقترحة">
+            <button onclick="requestAccount()" style="background-color: #28a745;">تقديم الطلب (عبر واتساب)</button>
+
+            <p id="auth-error" style="color: red; display: none; margin-top: 10px;"></p>
         </div>
     </div>
     <div id="toast">✅ تم بنجاح</div>
@@ -806,8 +815,8 @@
                 { user: "sala", pass: "sala123" },
                 { user: "moha", pass: "moha123" },
                 { user: "انس", pass: "سلا صالح" },
-                { user: "saleh", pass: "sal123" },
-                { user: "نصر البرش", pass: "12345678" }
+                { user: "ahmed", pass: "ahmed123" },
+                { user: "صالح", pass: "saleh123" }
             ];
 
             // رقم الهاتف الخاص بك لاستقبال الطلبات
@@ -823,47 +832,78 @@
                     return false;
                 }
 
-                // البحث عن المستخدم في القائمة الحالية
+                // البحث عن الحساب
                 const found = authorizedUsers.find(account =>
-                    account.user.toLowerCase() === uInput && account.pass === pInput
+                    account.user.toLowerCase() === uInput &&
+                    account.pass === pInput
                 );
 
                 if (found) {
-                    // إذا كان الحساب موجوداً وموافقاً عليه مسبقاً
+
+                    // نجاح تسجيل الدخول
                     document.getElementById('login-screen').style.display = 'none';
+
                     showToast("🔓 أهلاً بك " + uInput);
+
                     updateDailySystem(uInput);
 
                     const now = new Date().getTime();
+
                     localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('loginUser', uInput); // حفظ اسم المستخدم للجلسة
+                    localStorage.setItem('loginUser', uInput);
                     localStorage.setItem('loginTime', now);
-                    return false;
+
                 } else {
-                    // إذا لم يكن الحساب مسجلاً، نتحقق إن كان الاسم مستخدماً بكلمة سر خاطئة أو حساب جديد تماماً
-                    const userExists = authorizedUsers.some(account => account.user.toLowerCase() === uInput);
 
-                    if (userExists) {
-                        errorMsg.innerText = "❌ كلمة المرور غير صحيحة لـ هذا الحساب!";
-                        errorMsg.style.display = 'block';
-                        document.getElementById('password').value = "";
-                    } else {
-                        // حساب جديد -> عرض خيار إرسال طلب انضمام عبر الواتساب
-                        errorMsg.innerText = "⚠️ هذا الحساب غير مسجل. جاري تحضير طلب الانضمام...";
-                        errorMsg.style.display = 'block';
+                    // فشل تسجيل الدخول فقط
+                    errorMsg.innerText = "❌ اسم المستخدم أو كلمة المرور غير صحيحة";
+                    errorMsg.style.display = 'block';
 
-                        // تجهيز نص الرسالة للواتساب
-                        const messageText = `طلب انضمام جديد إلى إنيجما المقاومة 🛡️\n\n👤 اسم المستخدم: ${uInput}\n🔑 كلمة المرور المقترحة: ${pInput}\n\n\n{ user: "${uInput}", pass: "${pInput}" }`;
-                        const encodedMessage = encodeURIComponent(messageText);
-
-                        // فتح الواتساب بعد ثانيتين ليعرف المستخدم ما يحدث
-                        setTimeout(() => {
-                            window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`, '_blank');
-                            showToast("📲 تم توجيهك للواتساب لإرسال طلب الانضمام للمطور");
-                        }, 2000);
-                    }
+                    document.getElementById('password').value = "";
                 }
+
                 return false;
+            }
+
+
+            function requestAccount() {
+
+                const username = document.getElementById('req-username').value.trim();
+                const password = document.getElementById('req-password').value.trim();
+
+                if (!username || !password) {
+                    showToast("⚠️ أكمل بيانات الطلب");
+                    return;
+                }
+
+                // التحقق هل الاسم مستخدم مسبقاً
+                const exists = authorizedUsers.some(account =>
+                    account.user.toLowerCase() === username.toLowerCase()
+                );
+
+                if (exists) {
+                    showToast("⚠️ اسم المستخدم مستخدم مسبقاً");
+                    return;
+                }
+
+                const messageText =
+                    `طلب انضمام جديد إلى إنيجما المقاومة 🛡️
+
+👤 اسم المستخدم: ${username}
+
+🔑 كلمة المرور المقترحة: ${password}
+
+لإضافة الحساب داخل النظام:
+{ user: "${username}", pass: "${password}" }`;
+
+                const encodedMessage = encodeURIComponent(messageText);
+
+                window.open(
+                    `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`,
+                    '_blank'
+                );
+
+                showToast("📲 تم فتح الواتساب لإرسال الطلب");
             }
 
             // حماية الصفحة وتحديثات الجلسة المحفوظة
