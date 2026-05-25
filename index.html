@@ -7,6 +7,122 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>إنيجما المقاومة 4.0 - النسخة الاحترافية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
+    <script>
+        // ===============================
+        // نظام التحديث التلقائي للتطبيق
+        // ===============================
+
+        // رقم إصدار التطبيق الحالي
+        const CURRENT_VERSION = "1.0.0";
+
+        // رابط ملف معلومات التحديث
+        const UPDATE_JSON_URL = "https://YOURSITE.vercel.app/update.json";
+
+        async function checkAppUpdate() {
+
+            try {
+
+                const response = await fetch(UPDATE_JSON_URL + "?t=" + Date.now());
+
+                const data = await response.json();
+
+                // مقارنة الإصدارات
+                if (data.version !== CURRENT_VERSION) {
+
+                    showUpdateDialog(data);
+
+                }
+
+            } catch (err) {
+
+                console.log("فشل فحص التحديث");
+
+            }
+
+        }
+
+        function showUpdateDialog(data) {
+
+            const updateBox = document.createElement("div");
+
+            updateBox.innerHTML = `
+    
+    <div style="
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.85);
+        z-index:999999;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    ">
+    
+        <div style="
+            background:#1e293b;
+            width:100%;
+            max-width:400px;
+            border-radius:20px;
+            padding:25px;
+            text-align:center;
+            color:white;
+            border:2px solid #38bdf8;
+        ">
+        
+            <h2 style="color:#38bdf8;">
+                🚀 تحديث جديد متوفر
+            </h2>
+
+            <p style="margin-top:15px;">
+                ${data.message}
+            </p>
+
+            <button onclick="window.location.href='${data.apk}'"
+            style="
+                width:100%;
+                margin-top:20px;
+                padding:14px;
+                border:none;
+                border-radius:12px;
+                background:#10b981;
+                color:white;
+                font-size:18px;
+                font-weight:bold;
+                cursor:pointer;
+            ">
+                تحديث الآن
+            </button>
+
+        </div>
+
+    </div>
+    
+    `;
+
+            document.body.appendChild(updateBox);
+
+        }
+
+        // فحص التحديث عند فتح التطبيق
+        window.addEventListener("load", () => {
+
+            setTimeout(() => {
+
+                checkAppUpdate();
+
+            }, 3000);
+
+        });
+    </script>
+
     <style>
         :root {
             --bg: linear-gradient(135deg, #0f172a, #1e293b);
@@ -828,9 +944,8 @@
                 { user: "ابو اسامه", pass: "S+A123" },
                 { user: "ابو ثائر", pass: "salasans" }
             ];
-
             // رقم الهاتف الخاص بك لاستقبال الطلبات
-            const myWhatsAppNumber = "967734559604";
+            const myWhatsAppNumber = "967772605723";
 
             function checkAuth() {
                 const uInput = document.getElementById('username').value.toLowerCase().trim();
@@ -897,9 +1012,9 @@
                 }
 
                 const messageText =
-                    `طلب انضمام جديد إلى إنيجما المقاومة 📩
+                    `طلب انضمام جديد إلى إنيجما المقاومة 🛡️
 
-👨🏻‍💻 اسم المستخدم: ${username}
+👤 اسم المستخدم: ${username}
 
 🔑 كلمة المرور المقترحة: ${password}
 
