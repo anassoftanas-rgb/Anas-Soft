@@ -23,13 +23,17 @@ self.addEventListener("fetch", event => {
 
     event.respondWith(
 
-        fetch(event.request)
-            .catch(() => {
+        caches.match(event.request)
+            .then(response => {
 
-                return caches.match(event.request);
+                return response || fetch(event.request);
 
             })
 
     );
 
+});
+
+self.addEventListener("activate", event => {
+    event.waitUntil(self.clients.claim());
 });
