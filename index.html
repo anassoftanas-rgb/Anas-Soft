@@ -2,125 +2,11 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>طيف المقاومة  4.0 - النسخة الاحترافية</title>
-    <link rel="manifest" href="manifest.json">
+    <title>طيف المقاومة 4.0 - النسخة الاحترافية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-   
-
-
-    <script>
-        // ===============================
-        // نظام التحديث التلقائي للتطبيق
-        // ===============================
-
-        // رقم إصدار التطبيق الحالي
-        const CURRENT_VERSION = "1.0.1";
-
-        // رابط ملف معلومات التحديث
-        const UPDATE_JSON_URL = "https://Anas-Soft.vercel.app/update.json";
-        async function checkAppUpdate() {
-
-            try {
-
-                const response = await fetch(UPDATE_JSON_URL + "?t=" + Date.now());
-
-                const data = await response.json();
-
-                // مقارنة الإصدارات
-                if (data.version !== CURRENT_VERSION) {
-
-                    showUpdateDialog(data);
-
-                }
-
-            } catch (err) {
-
-                console.log("فشل فحص التحديث");
-
-            }
-
-        }
-
-        function showUpdateDialog(data) {
-
-            const updateBox = document.createElement("div");
-
-            updateBox.innerHTML = `
-    
-    <div style="
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:rgba(0,0,0,0.85);
-        z-index:999999;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        padding:20px;
-    ">
-    
-        <div style="
-            background:#1e293b;
-            width:100%;
-            max-width:400px;
-            border-radius:20px;
-            padding:25px;
-            text-align:center;
-            color:white;
-            border:2px solid #38bdf8;
-        ">
-        
-            <h2 style="color:#38bdf8;">
-                🚀 تحديث جديد متوفر
-            </h2>
-
-            <p style="margin-top:15px;">
-                ${data.message}
-            </p>
-
-            <button onclick="window.location.href='${data.apk}'"
-            style="
-                width:100%;
-                margin-top:20px;
-                padding:14px;
-                border:none;
-                border-radius:12px;
-                background:#10b981;
-                color:white;
-                font-size:18px;
-                font-weight:bold;
-                cursor:pointer;
-            ">
-                تحديث الآن
-            </button>
-
-        </div>
-
-    </div>
-    
-    `;
-
-            document.body.appendChild(updateBox);
-
-        }
-
-        // فحص التحديث عند فتح التطبيق
-        window.addEventListener("load", () => {
-
-            setTimeout(() => {
-
-                checkAppUpdate();
-
-            }, 3000);
-
-        });
-    </script>
-
     <style>
         :root {
             --bg: linear-gradient(135deg, #0f172a, #1e293b);
@@ -610,7 +496,7 @@
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;">
         <div class="main-card" style="text-align: center;">
             <h2 style="color: var(--accent);">🔐 نظام الوصول الآمن</h2>
-            <p>يرجى إدخال البيانات للوصول إلى طيف المقاومة</p>
+            <p>يرجى إدخال البيانات للوصول إلى إنيجما</p>
             <div style="margin-top: 20px;"><input type="text" id="username" placeholder="اسم المستخدم"
                     style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><input
                     type="password" id="password" placeholder="كلمة المرور"
@@ -643,7 +529,7 @@
             <div class="theme-toggle" onclick="toggleTheme()" id="themeBtn"
                 style="position: absolute; top: 15px; left: 15px; cursor: pointer; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent);">
                 🌞</div>
-            <h1 style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span>طيف
+            <h1 style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span>إنيجما
                     المقاومة</span><img src="anas.jpg" alt="Team Logo" class="anas-jpg-logo"></h1>
             <p>درعك المتين في فضاء الخصوصية</p>
         </div>
@@ -928,7 +814,7 @@
 
             // قائمة المستخدمين المصرح لهم (يمكنك إضافة أي عدد)
             // قائمة المستخدمين المصرح لهم (قم بإضافة الأعضاء الجدد هنا بعد الموافقة عليهم عبر الواتساب)
-            const authorizedUsers = [
+             const authorizedUsers = [
                 { user: "anas", pass: "anas123" },
                 { user: "ebrahem", pass: "ebrahem2026" },
                 { user: "sanad", pass: "sanad123" },
@@ -947,6 +833,7 @@
                 { user: "خولان", pass: "123456" },
                 { user: "احمد", pass: "1234567" }
             ];
+
             // رقم الهاتف الخاص بك لاستقبال الطلبات
             const myWhatsAppNumber = "967734559604";
 
@@ -1098,21 +985,6 @@
                     document.getElementById('login-screen').style.display = 'flex';
                 }
             }); </script>
-
-        <script>
-
-if ('serviceWorker' in navigator) {
-
-  navigator.serviceWorker.register('/service-worker.js')
-    .then(() => {
-
-      console.log("SW Registered");
-
-    });
-
-}
-
-</script>
 </body>
 
 </html>
