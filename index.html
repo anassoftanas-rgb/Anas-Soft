@@ -280,13 +280,11 @@
             border-radius: 12px;
             background: rgba(56, 189, 248, 0.05);
         }
-
         .admin-panel h3 {
             color: var(--accent);
             text-align: center;
             margin-bottom: 15px;
         }
-
         .admin-panel input {
             width: 100%;
             padding: 10px;
@@ -298,7 +296,6 @@
             outline: none;
             font-family: inherit;
         }
-
         .admin-panel .btn-sm {
             padding: 8px 15px;
             border: none;
@@ -308,23 +305,20 @@
             color: white;
             margin: 3px;
         }
-
         .admin-panel .user-list {
             margin-top: 10px;
             max-height: 150px;
             overflow-y: auto;
         }
-
         .admin-panel .user-item {
             display: flex;
             justify-content: space-between;
             padding: 6px 10px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             border-radius: 6px;
             margin-bottom: 4px;
             font-size: 13px;
         }
-
         .admin-panel .user-item .del-btn {
             color: var(--danger);
             cursor: pointer;
@@ -332,16 +326,29 @@
             border: none;
             font-size: 14px;
         }
-
         .admin-panel .user-item .del-btn:hover {
             transform: scale(1.2);
         }
-
         .admin-panel .sync-status {
             font-size: 12px;
-            color: #6c757d;
+            color: #10b981;
             text-align: center;
             margin-top: 8px;
+        }
+        .admin-panel .export-area {
+            margin-top: 10px;
+        }
+        .admin-panel .export-area textarea {
+            min-height: 60px;
+            font-size: 11px;
+            padding: 8px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            color: var(--text);
+            width: 100%;
+            resize: vertical;
+            font-family: monospace;
         }
     </style>
 </head>
@@ -361,8 +368,7 @@
                     style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
                 <button class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button>
             </div>
-            <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير
-                صحيحة!</p>
+            <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير صحيحة!</p>
 
             <hr style="margin: 20px 0; border: 1px solid #ccc;">
 
@@ -371,8 +377,7 @@
                 style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
             <input type="password" id="req-password" placeholder="كلمة المرور المقترحة"
                 style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
-            <button class="btn btn-dec" onclick="requestAccount()" style="width: 100%; background-color: #28a745;">تقديم
-                الطلب (عبر واتساب)</button>
+            <button class="btn btn-dec" onclick="requestAccount()" style="width: 100%; background-color: #28a745;">تقديم الطلب (عبر واتساب)</button>
             <br>
         </div>
     </div>
@@ -393,11 +398,9 @@
 
         <div id="dailyRotorDisplay"
             style="margin-bottom: 15px; padding: 15px; border: 1px solid var(--accent); border-radius: 12px; background: rgba(56, 189, 248, 0.05); text-align: center;">
-            <div id="welcome-msg"
-                style="color: var(--success); font-weight: bold; margin-bottom: 8px; font-size: 1.1rem;"></div>
+            <div id="welcome-msg" style="color: var(--success); font-weight: bold; margin-bottom: 8px; font-size: 1.1rem;"></div>
             <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">مفاتيح العمليات المعتمدة لهذا اليوم:</div>
-            <div id="rotor-values"
-                style="font-weight: bold; font-size: 1rem; color: var(--warning); letter-spacing: 1px;"></div><br>
+            <div id="rotor-values" style="font-weight: bold; font-size: 1rem; color: var(--warning); letter-spacing: 1px;"></div><br>
             <div class="keys-row">
                 <input type="text" id="k1" placeholder="مفتاح 1">
                 <input type="text" id="k2" placeholder="مفتاح 2">
@@ -406,73 +409,57 @@
             <textarea id="msg" placeholder="أدخل النص المراد تأمينه..."></textarea>
             <div class="btn-grid">
                 <button class="btn btn-enc" onclick="process(true)">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                    </svg>تشفير
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>تشفير
                 </button>
                 <button class="btn btn-dec" onclick="process(false)">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65z" />
-                    </svg>فك تشفير
+                    <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65z"/></svg>فك تشفير
                 </button>
                 <button class="btn btn-clr" onclick="clearAll()">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                    </svg>تفريغ البيانات
+                    <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>تفريغ البيانات
                 </button>
             </div>
             <div id="output-container">في انتظار البيانات...</div>
             <div class="btn-grid" style="margin-top:10px;">
                 <button class="btn" style="background:var(--warning)" onclick="copyText()">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z" />
-                    </svg>نسخ النتيجة
+                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z"/></svg>نسخ النتيجة
                 </button>
                 <button class="btn" style="background:var(--accent)" onclick="openModal('modal-share')">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-                    </svg>مشاركة آمنة
+                    <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>مشاركة آمنة
                 </button>
             </div>
 
-            <!-- ===== واجهة إدارة المستخدمين ===== -->
+            <!-- ===== واجهة إدارة المستخدمين (بدون سحابة) ===== -->
             <div id="adminPanel" class="admin-panel" style="display: none;">
-                <h3>👑 إدارة المستخدمين</h3>
+                <h3>👑 إدارة المستخدمين (تخزين محلي)</h3>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                     <input type="text" id="newUserName" placeholder="اسم المستخدم الجديد" style="flex: 2;">
                     <input type="password" id="newUserPass" placeholder="كلمة المرور" style="flex: 2;">
-                    <button class="btn btn-sm" style="background: var(--success);" onclick="addUser()">➕ إضافة</button>
+                    <button class="btn btn-sm" style="background: var(--success);" onclick="addUserLocal()">➕ إضافة</button>
                 </div>
                 <div class="user-list" id="userListDisplay">
                     <div style="text-align: center; color: #6c757d; padding: 10px;">جاري تحميل المستخدمين...</div>
                 </div>
-                <div class="sync-status" id="syncStatus">🔄 جاري المزامنة مع السحابة...</div>
-                <button class="btn btn-sm"
-                    style="background: var(--warning); margin-top: 8px; width: 100%; color: #000;"
-                    onclick="refreshUsers()">🔄 تحديث من السحابة</button>
+                <div class="sync-status" id="syncStatus">✅ التخزين المحلي - يعمل بدون إنترنت</div>
+                
+                <div class="export-area">
+                    <button class="btn btn-sm" style="background: var(--warning); margin-top: 8px; width: 100%; color: #000;" onclick="exportUsers()">📋 تصدير المستخدمين</button>
+                    <button class="btn btn-sm" style="background: var(--accent); margin-top: 5px; width: 100%;" onclick="document.getElementById('importArea').style.display='block'">📥 استيراد مستخدمين</button>
+                    <div id="importArea" style="display: none; margin-top: 8px;">
+                        <textarea id="importData" placeholder="الصق كود المستخدمين هنا..."></textarea>
+                        <button class="btn btn-sm" style="background: var(--success); margin-top: 5px; width: 100%;" onclick="importUsers()">استيراد</button>
+                    </div>
+                </div>
             </div>
 
             <div class="bottom-nav">
                 <div class="nav-item" onclick="openModal('modal-guide')">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
-                    </svg>الدليل
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>الدليل
                 </div>
                 <div class="nav-item" onclick="openModal('modal-system')">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                    </svg>عن النظام
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>عن النظام
                 </div>
                 <div class="nav-item" onclick="openModal('modal-dev')">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                    </svg>المهندس
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>المهندس
                 </div>
             </div>
         </div>
@@ -502,33 +489,19 @@
             <div class="modal">
                 <h2>👨‍💻 تواصل مع المهندس</h2>
                 <a href="https://wa.me/967734559604" class="list-btn" style="background:var(--wa);">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543 1.64-1.64 2.543-3.834 2.543-6.155 0-2.32-.903-4.514-2.543-6.154-1.641-1.64-3.836-2.543-6.157-2.543zm5.077 11.231c-.22.618-1.282 1.138-1.782 1.21-.499.073-1.12.131-1.767-.132-1.422-.581-2.529-1.291-3.473-2.235-.944-.944-1.654-2.051-2.235-3.473-.263-.647-.205-1.268-.132-1.767.072-.5.592-1.561 1.21-1.782.164-.06.335-.089.506-.088.132 0 .265.023.393.069.15.054.293.208.358.461l.525 1.267c.101.244.053.472-.11.639l-.441.455c-.147.151-.162.378-.037.55.303.418.66.793 1.062 1.116.338.272.713.491 1.114.65.178.07.351.05.474-.078l.455-.441c.167-.163.395-.211.639-.11l1.267.525c.253.065.407.208.461.358.046.128.069.261.069.393-.001.171-.03.342-.091.506z" />
-                    </svg><span>واتساب</span>
+                    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543 1.64-1.64 2.543-3.834 2.543-6.155 0-2.32-.903-4.514-2.543-6.154-1.641-1.64-3.836-2.543-6.157-2.543zm5.077 11.231c-.22.618-1.282 1.138-1.782 1.21-.499.073-1.12.131-1.767-.132-1.422-.581-2.529-1.291-3.473-2.235-.944-.944-1.654-2.051-2.235-3.473-.263-.647-.205-1.268-.132-1.767.072-.5.592-1.561 1.21-1.782.164-.06.335-.089.506-.088.132 0 .265.023.393.069.15.054.293.208.358.461l.525 1.267c.101.244.053.472-.11.639l-.441.455c-.147.151-.162.378-.037.55.303.418.66.793 1.062 1.116.338.272.713.491 1.114.65.178.07.351.05.474-.078l.455-.441c.167-.163.395-.211.639-.11l1.267.525c.253.065.407.208.461.358.046.128.069.261.069.393-.001.171-.03.342-.091.506z"/></svg><span>واتساب</span>
                 </a>
                 <a href="https://www.facebook.com/share/1BiQ8SXXyM/" class="list-btn" style="background:var(--fb);">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg><span>فيسبوك</span>
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span>فيسبوك</span>
                 </a>
                 <a href="mailto:za90za90ascii@gmail.com" class="list-btn" style="background:var(--mail);">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg><span>البريد الإلكتروني</span>
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>البريد الإلكتروني</span>
                 </a>
                 <a href="sms:+967734559604" class="list-btn" style="background:var(--sms);">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg><span>رسالة نصية SMS</span>
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg><span>رسالة نصية SMS</span>
                 </a>
                 <a href="tel:+967734559604" class="list-btn" style="background:var(--call);">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.79 6.35 8.59 5.16 8.59 3.92 8.59 3.41 8.18 3 7.67 3H4.19C3.68 3 3.25 3.4 3.25 3.92 3.25 13.24 10.74 20.75 20.01 20.75c.51 0 .92-.41.92-.92v-3.53c0-.51-.41-.92-.92-.92z" />
-                    </svg><span>اتصال هاتفي</span>
+                    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.79 6.35 8.59 5.16 8.59 3.92 8.59 3.41 8.18 3 7.67 3H4.19C3.68 3 3.25 3.4 3.25 3.92 3.25 13.24 10.74 20.75 20.01 20.75c.51 0 .92-.41.92-.92v-3.53c0-.51-.41-.92-.92-.92z"/></svg><span>اتصال هاتفي</span>
                 </a>
                 <button class="btn btn-clr" style="width:100%; margin-top:5px;" onclick="closeModals()">إغلاق</button>
             </div>
@@ -538,21 +511,13 @@
             <div class="modal">
                 <h2>🚀 مشاركة آمنة</h2>
                 <button class="list-btn" style="background:var(--wa);" onclick="doShare('wa')">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543z" />
-                    </svg><span>واتساب</span>
+                    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543z"/></svg><span>واتساب</span>
                 </button>
                 <button class="list-btn" style="background:var(--fb);" onclick="doShare('fb')">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg><span>فيسبوك</span>
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span>فيسبوك</span>
                 </button>
                 <button class="list-btn" style="background:var(--sms);" onclick="doShare('sms')">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg><span>رسالة نصية SMS</span>
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg><span>رسالة نصية SMS</span>
                 </button>
                 <button class="btn btn-clr" style="width:100%" onclick="closeModals()">إلغاء</button>
             </div>
@@ -560,92 +525,65 @@
 
         <script>
             // =============================================
-            // إعدادات JSONBin.io - قم بتغييرها ببياناتك
+            // نظام التخزين المحلي (LocalStorage) - بدون سحابة
             // =============================================
-            const config = {
-    API_KEY: "$2a$10$krZzLSnc1waC/9r7Kv4VY.DKxOVBKzaIbY0grssv8e3HqiV0v1PMm",
-    BIN_ID: "6a64e2bcf5f4af5e29c043c6"
-};
 
-fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
-    method: 'GET',
-    headers: { 'X-Master-Key': config.API_KEY }
-})
-.then(res => {
-    console.log("✅ الحالة:", res.status);
-    return res.json();
-})
-.then(data => console.log("📋 البيانات:", data))
-.catch(err => console.error("❌ خطأ:", err));
-
-            // =============================================
-            // قائمة المستخدمين الافتراضية (في حال فشل التحميل)
-            // =============================================
-            let authorizedUsers = [
+            // المستخدمين الافتراضيين
+            const DEFAULT_USERS = [
                 { user: "anas", pass: "anas123" },
                 { user: "admin", pass: "Admin2026@Secure" }
             ];
+
+            let authorizedUsers = [];
 
             // كلمة المرور الخاصة بمدير المستخدمين
             const ADMIN_PASSWORD = "Admin2026@Secure";
             const myWhatsAppNumber = "967734559604";
 
             // =============================================
-            // دوال التعامل مع JSONBin.io
+            // دوال التخزين المحلي
             // =============================================
 
-            // تحميل المستخدمين من السحابة
-            async function loadUsersFromCloud() {
+            // تحميل المستخدمين من localStorage
+            function loadUsersLocal() {
                 try {
-                    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}/latest`, {
-                        headers: {
-                            'X-Master-Key': JSONBIN_CONFIG.API_KEY
+                    const saved = localStorage.getItem('authorizedUsers');
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            authorizedUsers = parsed;
+                        } else {
+                            authorizedUsers = DEFAULT_USERS;
+                            saveUsersLocal();
                         }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
+                    } else {
+                        authorizedUsers = DEFAULT_USERS;
+                        saveUsersLocal();
                     }
-
-                    const data = await response.json();
-                    const users = data.record?.users || [];
-
-                    if (users.length > 0) {
-                        authorizedUsers = users;
-                        return true;
-                    }
-                    return false;
-                } catch (error) {
-                    console.error("❌ فشل تحميل المستخدمين من السحابة:", error);
-                    return false;
+                    renderUserList();
+                    updateSyncStatus('✅ تم التحميل من المتصفح (يعمل بدون إنترنت)', true);
+                } catch (e) {
+                    console.error("فشل التحميل:", e);
+                    authorizedUsers = DEFAULT_USERS;
+                    renderUserList();
                 }
             }
 
-            // حفظ المستخدمين في السحابة
-            async function saveUsersToCloud(users) {
+            // حفظ المستخدمين في localStorage
+            function saveUsersLocal() {
                 try {
-                    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Master-Key': JSONBIN_CONFIG.API_KEY
-                        },
-                        body: JSON.stringify({ users: users })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error("❌ فشل حفظ المستخدمين في السحابة:", error);
-                    return null;
+                    localStorage.setItem('authorizedUsers', JSON.stringify(authorizedUsers));
+                    renderUserList();
+                    updateSyncStatus('✅ تم الحفظ في المتصفح', true);
+                    return true;
+                } catch (e) {
+                    showToast("❌ فشل الحفظ: " + e.message);
+                    updateSyncStatus('❌ فشل الحفظ', false);
+                    return false;
                 }
             }
 
-            // عرض حالة المزامنة
+            // تحديث حالة المزامنة
             function updateSyncStatus(message, isSuccess = true) {
                 const statusEl = document.getElementById('syncStatus');
                 if (statusEl) {
@@ -654,25 +592,32 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
                 }
             }
 
-            // =============================================
-            // دوال إدارة المستخدمين (مع السحابة)
-            // =============================================
-
-            // تحميل وعرض المستخدمين
-            async function refreshUsers() {
-                updateSyncStatus('🔄 جاري التحميل من السحابة...', true);
-                const loaded = await loadUsersFromCloud();
-                if (loaded) {
-                    renderUserList();
-                    updateSyncStatus('✅ تم التحميل من السحابة بنجاح', true);
-                } else {
-                    updateSyncStatus('⚠️ فشل التحميل، جاري استخدام القائمة المحلية', false);
-                    renderUserList();
+            // عرض قائمة المستخدمين
+            function renderUserList() {
+                const container = document.getElementById('userListDisplay');
+                if (!container) return;
+                
+                if (authorizedUsers.length === 0) {
+                    container.innerHTML = '<div style="color: #6c757d; text-align: center; padding: 10px;">لا يوجد مستخدمين</div>';
+                    return;
                 }
+                container.innerHTML = authorizedUsers.map((u, i) => `
+                    <div class="user-item">
+                        <span>👤 ${u.user}</span>
+                        <span>
+                            <span style="color: #6c757d; font-size: 12px;">${u.pass}</span>
+                            <button class="del-btn" onclick="deleteUserLocal(${i})">✖</button>
+                        </span>
+                    </div>
+                `).join('');
             }
 
+            // =============================================
+            // دوال إدارة المستخدمين
+            // =============================================
+
             // إضافة مستخدم جديد
-            async function addUser() {
+            function addUserLocal() {
                 const nameInput = document.getElementById('newUserName');
                 const passInput = document.getElementById('newUserPass');
                 const username = nameInput.value.trim();
@@ -683,78 +628,140 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
                     return;
                 }
 
-                // التحقق من عدم تكرار الاسم
                 if (authorizedUsers.some(u => u.user.toLowerCase() === username.toLowerCase())) {
                     showToast("⚠️ اسم المستخدم موجود مسبقاً");
                     return;
                 }
 
-                // إضافة المستخدم محلياً
                 authorizedUsers.push({ user: username, pass: password });
                 nameInput.value = '';
                 passInput.value = '';
-
-                // حفظ في السحابة
-                updateSyncStatus('🔄 جاري الحفظ في السحابة...', true);
-                const result = await saveUsersToCloud(authorizedUsers);
-
-                if (result) {
-                    renderUserList();
-                    updateSyncStatus('✅ تم حفظ المستخدم في السحابة بنجاح', true);
+                
+                if (saveUsersLocal()) {
                     showToast("✅ تم إضافة المستخدم: " + username);
-                } else {
-                    // التراجع عن الإضافة إذا فشل الحفظ
-                    authorizedUsers.pop();
-                    updateSyncStatus('❌ فشل الحفظ في السحابة، حاول مرة أخرى', false);
-                    showToast("❌ فشل الحفظ في السحابة!");
                 }
             }
 
             // حذف مستخدم
-            async function deleteUser(index) {
+            function deleteUserLocal(index) {
                 if (confirm(`هل أنت متأكد من حذف المستخدم "${authorizedUsers[index].user}"؟`)) {
                     const deletedUser = authorizedUsers[index].user;
                     authorizedUsers.splice(index, 1);
-
-                    // حفظ في السحابة
-                    updateSyncStatus('🔄 جاري الحذف من السحابة...', true);
-                    const result = await saveUsersToCloud(authorizedUsers);
-
-                    if (result) {
-                        renderUserList();
-                        updateSyncStatus('✅ تم حذف المستخدم من السحابة', true);
+                    if (saveUsersLocal()) {
                         showToast("🗑️ تم حذف المستخدم: " + deletedUser);
-                    } else {
-                        // استعادة المستخدم إذا فشل الحذف
-                        showToast("❌ فشل الحذف من السحابة!");
-                        await refreshUsers(); // إعادة تحميل القائمة
                     }
                 }
             }
 
-            // عرض قائمة المستخدمين
-            function renderUserList() {
-                const container = document.getElementById('userListDisplay');
-                if (authorizedUsers.length === 0) {
-                    container.innerHTML = '<div style="color: #6c757d; text-align: center; padding: 10px;">لا يوجد مستخدمين</div>';
+            // =============================================
+            // تصدير واستيراد المستخدمين (مُصلح)
+            // =============================================
+
+            // تصدير المستخدمين ككود
+            function exportUsers() {
+                const code = `// ===== قائمة المستخدمين =====\nconst users = [\n` +
+                    authorizedUsers.map(u => `    { user: "${u.user}", pass: "${u.pass}" }`).join(',\n') +
+                    `\n];`;
+                
+                navigator.clipboard.writeText(code).then(() => {
+                    showToast("📋 تم نسخ كود المستخدمين!");
+                }).catch(() => {
+                    const win = window.open('', '_blank', 'width=600,height=400');
+                    win.document.write(`<pre style="direction:ltr;text-align:left;font-size:14px;font-family:monospace;">${code}</pre>`);
+                    win.document.title = "كود المستخدمين";
+                });
+            }
+
+            // استيراد المستخدمين (مُصلح للتعامل مع تنسيقات متعددة)
+            function importUsers() {
+                const data = document.getElementById('importData').value.trim();
+                if (!data) {
+                    showToast("⚠️ يرجى لصق كود المستخدمين");
                     return;
                 }
-                container.innerHTML = authorizedUsers.map((u, i) => `
-                    <div class="user-item">
-                        <span>👤 ${u.user}</span>
-                        <span>
-                            <span style="color: #6c757d; font-size: 12px;">${u.pass}</span>
-                            <button class="del-btn" onclick="deleteUser(${i})">✖</button>
-                        </span>
-                    </div>
-                `).join('');
+
+                try {
+                    let newUsers = [];
+
+                    // محاولة 1: البحث عن نمط { user: "xxx", pass: "yyy" }
+                    let matches = data.matchAll(/["']?\s*user\s*["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?\s*pass\s*["']?\s*:\s*["']([^"']+)["']/g);
+                    for (const match of matches) {
+                        newUsers.push({ user: match[1], pass: match[2] });
+                    }
+
+                    // محاولة 2: إذا لم يجد، حاول استخراج من JSON
+                    if (newUsers.length === 0) {
+                        try {
+                            const jsonData = JSON.parse(data);
+                            if (Array.isArray(jsonData)) {
+                                jsonData.forEach(item => {
+                                    if (item.user && item.pass) {
+                                        newUsers.push({ user: item.user, pass: item.pass });
+                                    }
+                                });
+                            } else if (jsonData.user && jsonData.pass) {
+                                newUsers.push({ user: jsonData.user, pass: jsonData.pass });
+                            }
+                        } catch (e) {
+                            // محاولة 3: البحث عن نمط "user":"xxx","pass":"yyy"
+                            const regex2 = /["']user["']\s*:\s*["']([^"']+)["']\s*,\s*["']pass["']\s*:\s*["']([^"']+)["']/g;
+                            const matches2 = data.matchAll(regex2);
+                            for (const match of matches2) {
+                                newUsers.push({ user: match[1], pass: match[2] });
+                            }
+                        }
+                    }
+
+                    // محاولة 4: البحث عن كلمات مفتاحية في النص
+                    if (newUsers.length === 0) {
+                        const lines = data.split('\n');
+                        for (const line of lines) {
+                            const userMatch = line.match(/["']?([a-zA-Z0-9_\u0600-\u06FF]+)["']?\s*[:=]\s*["']([^"']+)["']/);
+                            if (userMatch && userMatch.length >= 3) {
+                                // حاول معرفة إذا كان اسم مستخدم أم كلمة مرور
+                                const key = userMatch[1].toLowerCase().trim();
+                                const value = userMatch[2].trim();
+                                if (key.includes('user') || key.includes('name') || key === 'username') {
+                                    // سنحاول ربطه مع التالي
+                                }
+                            }
+                        }
+                    }
+
+                    if (newUsers.length === 0) {
+                        showToast("⚠️ لم يتم العثور على مستخدمين في النص");
+                        return;
+                    }
+
+                    // دمج المستخدمين (تجنب التكرار)
+                    let addedCount = 0;
+                    newUsers.forEach(u => {
+                        if (!authorizedUsers.some(ex => ex.user.toLowerCase() === u.user.toLowerCase())) {
+                            authorizedUsers.push(u);
+                            addedCount++;
+                        }
+                    });
+
+                    if (addedCount === 0) {
+                        showToast("⚠️ جميع المستخدمين موجودين مسبقاً");
+                        return;
+                    }
+
+                    if (saveUsersLocal()) {
+                        showToast(`✅ تم استيراد ${addedCount} مستخدم جديد`);
+                        document.getElementById('importData').value = '';
+                        document.getElementById('importArea').style.display = 'none';
+                    }
+                } catch (e) {
+                    showToast("❌ فشل الاستيراد: " + e.message);
+                }
             }
 
             // =============================================
             // دوال المصادقة
             // =============================================
 
-            async function checkAuth() {
+            function checkAuth() {
                 const uInput = document.getElementById('username').value.toLowerCase().trim();
                 const pInput = document.getElementById('password').value.trim();
                 const errorMsg = document.getElementById('auth-error');
@@ -763,9 +770,6 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
                     showToast("⚠️ يرجى إدخال الاسم وكلمة المرور");
                     return false;
                 }
-
-                // تأكد من تحميل المستخدمين من السحابة أولاً
-                await refreshUsers();
 
                 // التحقق من كلمة مرور المدير
                 if (uInput === 'admin' && pInput === ADMIN_PASSWORD) {
@@ -776,7 +780,7 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
                     setTimeout(() => {
                         document.getElementById('adminPanel').style.display = 'block';
                         renderUserList();
-                        updateSyncStatus('✅ متصل بالسحابة', true);
+                        updateSyncStatus('✅ متصل - يعمل بدون إنترنت', true);
                     }, 500);
                     return true;
                 }
@@ -966,7 +970,7 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
                 const pass = prompt("🔐 أدخل كلمة مرور المدير للوصول إلى إدارة المستخدمين:");
                 if (pass === ADMIN_PASSWORD) {
                     document.getElementById('adminPanel').style.display = 'block';
-                    refreshUsers();
+                    renderUserList();
                     showToast("👑 مرحباً بك في لوحة إدارة المستخدمين");
                 } else if (pass !== null) {
                     showToast("❌ كلمة المرور غير صحيحة!");
@@ -977,17 +981,9 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
             // تهيئة الصفحة
             // =============================================
 
-            window.addEventListener('load', async () => {
-                // تحميل المستخدمين من السحابة أولاً
-                updateSyncStatus('🔄 جاري الاتصال بالسحابة...', true);
-                const loaded = await loadUsersFromCloud();
-                if (loaded) {
-                    updateSyncStatus('✅ تم التحميل من السحابة', true);
-                    renderUserList();
-                } else {
-                    updateSyncStatus('⚠️ وضع غير متصل، جاري استخدام القائمة المحلية', false);
-                    renderUserList();
-                }
+            window.addEventListener('load', () => {
+                // تحميل المستخدمين من التخزين المحلي
+                loadUsersLocal();
 
                 // تطبيق الوضع المحفوظ
                 const savedTheme = localStorage.getItem('theme');
@@ -1019,14 +1015,17 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
 
                 // اختصار لفتح لوحة الإدارة (النقر على الشعار 3 مرات)
                 let clickCount = 0;
-                document.querySelector('.header h1').addEventListener('click', function () {
-                    clickCount++;
-                    if (clickCount === 3) {
-                        clickCount = 0;
-                        openAdminPanel();
-                    }
-                    setTimeout(() => { clickCount = 0; }, 3000);
-                });
+                const headerTitle = document.querySelector('.header h1');
+                if (headerTitle) {
+                    headerTitle.addEventListener('click', function() {
+                        clickCount++;
+                        if (clickCount === 3) {
+                            clickCount = 0;
+                            openAdminPanel();
+                        }
+                        setTimeout(() => { clickCount = 0; }, 3000);
+                    });
+                }
             });
 
             function clearSession() {
@@ -1038,9 +1037,9 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
 
             // فتح لوحة الإدارة من وحدة التحكم
             console.log("🔐 للوصول السريع للوحة الإدارة: adminPanelAccess()");
-            window.adminPanelAccess = function () {
+            window.adminPanelAccess = function() {
                 document.getElementById('adminPanel').style.display = 'block';
-                refreshUsers();
+                renderUserList();
                 showToast("👑 تم فتح لوحة الإدارة");
             };
 
@@ -1052,5 +1051,4 @@ fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
         </script>
     </div>
 </body>
-
 </html>
