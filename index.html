@@ -428,7 +428,7 @@
                 </button>
             </div>
 
-            <!-- ===== واجهة إدارة المستخدمين (بدون سحابة) ===== -->
+            <!-- ===== واجهة إدارة المستخدمين ===== -->
             <div id="adminPanel" class="admin-panel" style="display: none;">
                 <h3>👑 إدارة المستخدمين (تخزين محلي)</h3>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -525,7 +525,7 @@
 
         <script>
             // =============================================
-            // نظام التخزين المحلي (LocalStorage) - بدون سحابة
+            // نظام التخزين المحلي (LocalStorage)
             // =============================================
 
             // المستخدمين الافتراضيين
@@ -535,8 +535,6 @@
             ];
 
             let authorizedUsers = [];
-
-            // كلمة المرور الخاصة بمدير المستخدمين
             const ADMIN_PASSWORD = "Admin2026@Secure";
             const myWhatsAppNumber = "967734559604";
 
@@ -544,7 +542,6 @@
             // دوال التخزين المحلي
             // =============================================
 
-            // تحميل المستخدمين من localStorage
             function loadUsersLocal() {
                 try {
                     const saved = localStorage.getItem('authorizedUsers');
@@ -553,23 +550,22 @@
                         if (Array.isArray(parsed) && parsed.length > 0) {
                             authorizedUsers = parsed;
                         } else {
-                            authorizedUsers = DEFAULT_USERS;
+                            authorizedUsers = JSON.parse(JSON.stringify(DEFAULT_USERS));
                             saveUsersLocal();
                         }
                     } else {
-                        authorizedUsers = DEFAULT_USERS;
+                        authorizedUsers = JSON.parse(JSON.stringify(DEFAULT_USERS));
                         saveUsersLocal();
                     }
                     renderUserList();
-                    updateSyncStatus('✅ تم التحميل من المتصفح (يعمل بدون إنترنت)', true);
+                    updateSyncStatus('✅ تم التحميل من المتصفح', true);
                 } catch (e) {
                     console.error("فشل التحميل:", e);
-                    authorizedUsers = DEFAULT_USERS;
+                    authorizedUsers = JSON.parse(JSON.stringify(DEFAULT_USERS));
                     renderUserList();
                 }
             }
 
-            // حفظ المستخدمين في localStorage
             function saveUsersLocal() {
                 try {
                     localStorage.setItem('authorizedUsers', JSON.stringify(authorizedUsers));
@@ -583,7 +579,6 @@
                 }
             }
 
-            // تحديث حالة المزامنة
             function updateSyncStatus(message, isSuccess = true) {
                 const statusEl = document.getElementById('syncStatus');
                 if (statusEl) {
@@ -592,7 +587,6 @@
                 }
             }
 
-            // عرض قائمة المستخدمين
             function renderUserList() {
                 const container = document.getElementById('userListDisplay');
                 if (!container) return;
@@ -616,7 +610,6 @@
             // دوال إدارة المستخدمين
             // =============================================
 
-            // إضافة مستخدم جديد
             function addUserLocal() {
                 const nameInput = document.getElementById('newUserName');
                 const passInput = document.getElementById('newUserPass');
@@ -642,7 +635,6 @@
                 }
             }
 
-            // حذف مستخدم
             function deleteUserLocal(index) {
                 if (confirm(`هل أنت متأكد من حذف المستخدم "${authorizedUsers[index].user}"؟`)) {
                     const deletedUser = authorizedUsers[index].user;
@@ -654,10 +646,9 @@
             }
 
             // =============================================
-            // تصدير واستيراد المستخدمين (مُصلح)
+            // تصدير واستيراد المستخدمين (مُصلح بالكامل)
             // =============================================
 
-            // تصدير المستخدمين ككود
             function exportUsers() {
                 const code = `// ===== قائمة المستخدمين =====\nconst users = [\n` +
                     authorizedUsers.map(u => `    { user: "${u.user}", pass: "${u.pass}" }`).join(',\n') +
@@ -672,7 +663,7 @@
                 });
             }
 
-            // استيراد المستخدمين (مُصلح للتعامل مع تنسيقات متعددة)
+            // دالة الاستيراد المُصلحة بالكامل
             function importUsers() {
                 const data = document.getElementById('importData').value.trim();
                 if (!data) {
@@ -683,46 +674,49 @@
                 try {
                     let newUsers = [];
 
-                    // محاولة 1: البحث عن نمط { user: "xxx", pass: "yyy" }
-                    let matches = data.matchAll(/["']?\s*user\s*["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?\s*pass\s*["']?\s*:\s*["']([^"']+)["']/g);
-                    for (const match of matches) {
-                        newUsers.push({ user: match[1], pass: match[2] });
+                    // محاولة 1: البحث عن النمط { user: "xxx", pass: "yyy" }
+                    const regex1 = /["']?\s*user\s*["']?\s*:\s*["']([^"']+)["']\s*,\s*["']?\s*pass\s*["']?\s*:\s*["']([^"']+)["']/gi;
+                    let match;
+                    while ((match = regex1.exec(data)) !== null) {
+                        newUsers.push({ user: match[1].trim(), pass: match[2].trim() });
                     }
 
-                    // محاولة 2: إذا لم يجد، حاول استخراج من JSON
+                    // محاولة 2: إذا لم يجد، حاول JSON
                     if (newUsers.length === 0) {
                         try {
                             const jsonData = JSON.parse(data);
                             if (Array.isArray(jsonData)) {
                                 jsonData.forEach(item => {
                                     if (item.user && item.pass) {
-                                        newUsers.push({ user: item.user, pass: item.pass });
+                                        newUsers.push({ user: String(item.user).trim(), pass: String(item.pass).trim() });
                                     }
                                 });
                             } else if (jsonData.user && jsonData.pass) {
-                                newUsers.push({ user: jsonData.user, pass: jsonData.pass });
+                                newUsers.push({ user: String(jsonData.user).trim(), pass: String(jsonData.pass).trim() });
                             }
                         } catch (e) {
-                            // محاولة 3: البحث عن نمط "user":"xxx","pass":"yyy"
-                            const regex2 = /["']user["']\s*:\s*["']([^"']+)["']\s*,\s*["']pass["']\s*:\s*["']([^"']+)["']/g;
-                            const matches2 = data.matchAll(regex2);
-                            for (const match of matches2) {
-                                newUsers.push({ user: match[1], pass: match[2] });
+                            // محاولة 3: البحث عن "user":"xxx","pass":"yyy"
+                            const regex2 = /["']user["']\s*:\s*["']([^"']+)["']\s*,\s*["']pass["']\s*:\s*["']([^"']+)["']/gi;
+                            let match2;
+                            while ((match2 = regex2.exec(data)) !== null) {
+                                newUsers.push({ user: match2[1].trim(), pass: match2[2].trim() });
                             }
                         }
                     }
 
-                    // محاولة 4: البحث عن كلمات مفتاحية في النص
+                    // محاولة 4: البحث عن سطور تحتوي على اسم وكلمة مرور
                     if (newUsers.length === 0) {
                         const lines = data.split('\n');
                         for (const line of lines) {
-                            const userMatch = line.match(/["']?([a-zA-Z0-9_\u0600-\u06FF]+)["']?\s*[:=]\s*["']([^"']+)["']/);
-                            if (userMatch && userMatch.length >= 3) {
-                                // حاول معرفة إذا كان اسم مستخدم أم كلمة مرور
-                                const key = userMatch[1].toLowerCase().trim();
-                                const value = userMatch[2].trim();
-                                if (key.includes('user') || key.includes('name') || key === 'username') {
-                                    // سنحاول ربطه مع التالي
+                            const trimmed = line.trim();
+                            if (!trimmed) continue;
+                            // البحث عن نمط: xxx, yyy أو xxx | yyy أو xxx : yyy
+                            const parts = trimmed.split(/[,:|]|،/);
+                            if (parts.length >= 2) {
+                                const user = parts[0].trim().replace(/["']/g, '');
+                                const pass = parts[1].trim().replace(/["']/g, '');
+                                if (user && pass && user.length > 0 && pass.length > 0) {
+                                    newUsers.push({ user: user, pass: pass });
                                 }
                             }
                         }
@@ -747,11 +741,18 @@
                         return;
                     }
 
-                    if (saveUsersLocal()) {
+                    // حفظ في localStorage
+                    try {
+                        localStorage.setItem('authorizedUsers', JSON.stringify(authorizedUsers));
+                        renderUserList();
+                        updateSyncStatus(`✅ تم استيراد ${addedCount} مستخدم جديد`, true);
                         showToast(`✅ تم استيراد ${addedCount} مستخدم جديد`);
                         document.getElementById('importData').value = '';
                         document.getElementById('importArea').style.display = 'none';
+                    } catch (e) {
+                        showToast("❌ فشل الحفظ: " + e.message);
                     }
+
                 } catch (e) {
                     showToast("❌ فشل الاستيراد: " + e.message);
                 }
@@ -771,7 +772,6 @@
                     return false;
                 }
 
-                // التحقق من كلمة مرور المدير
                 if (uInput === 'admin' && pInput === ADMIN_PASSWORD) {
                     document.getElementById('login-screen').style.display = 'none';
                     showToast("👑 مرحباً مدير النظام");
@@ -780,12 +780,11 @@
                     setTimeout(() => {
                         document.getElementById('adminPanel').style.display = 'block';
                         renderUserList();
-                        updateSyncStatus('✅ متصل - يعمل بدون إنترنت', true);
+                        updateSyncStatus('✅ متصل', true);
                     }, 500);
                     return true;
                 }
 
-                // التحقق من المستخدمين
                 const found = authorizedUsers.find(account =>
                     account.user.toLowerCase() === uInput &&
                     account.pass === pInput
@@ -894,7 +893,6 @@
             }
 
             function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-
             function closeModals() { document.querySelectorAll('.overlay').forEach(o => o.style.display = 'none'); }
 
             function clearAll() {
@@ -962,10 +960,6 @@
                 showToast("📲 تم فتح الواتساب لإرسال الطلب");
             }
 
-            // =============================================
-            // فتح لوحة الإدارة
-            // =============================================
-
             function openAdminPanel() {
                 const pass = prompt("🔐 أدخل كلمة مرور المدير للوصول إلى إدارة المستخدمين:");
                 if (pass === ADMIN_PASSWORD) {
@@ -982,17 +976,14 @@
             // =============================================
 
             window.addEventListener('load', () => {
-                // تحميل المستخدمين من التخزين المحلي
                 loadUsersLocal();
 
-                // تطبيق الوضع المحفوظ
                 const savedTheme = localStorage.getItem('theme');
                 if (savedTheme === 'light') {
                     document.documentElement.setAttribute('data-theme', 'light');
                     document.getElementById('themeBtn').innerText = '🌙';
                 }
 
-                // التحقق من الجلسة
                 const isLoggedIn = localStorage.getItem('isLoggedIn');
                 const loginTime = localStorage.getItem('loginTime');
                 const loginUser = localStorage.getItem('loginUser') || "المجاهد";
@@ -1013,7 +1004,6 @@
                     clearSession();
                 }
 
-                // اختصار لفتح لوحة الإدارة (النقر على الشعار 3 مرات)
                 let clickCount = 0;
                 const headerTitle = document.querySelector('.header h1');
                 if (headerTitle) {
@@ -1035,15 +1025,12 @@
                 document.getElementById('login-screen').style.display = 'flex';
             }
 
-            // فتح لوحة الإدارة من وحدة التحكم
-            console.log("🔐 للوصول السريع للوحة الإدارة: adminPanelAccess()");
             window.adminPanelAccess = function() {
                 document.getElementById('adminPanel').style.display = 'block';
                 renderUserList();
                 showToast("👑 تم فتح لوحة الإدارة");
             };
 
-            // التسجيل في Service Worker
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/service-worker.js')
                     .then(() => { console.log("SW Registered"); });
