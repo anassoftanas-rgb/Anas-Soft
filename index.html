@@ -9,118 +9,6 @@
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
-
-
-    <script>
-        // ===============================
-        // نظام التحديث التلقائي للتطبيق
-        // ===============================
-
-        // رقم إصدار التطبيق الحالي
-        const CURRENT_VERSION = "1.0.1";
-
-        // رابط ملف معلومات التحديث
-        const UPDATE_JSON_URL = "https://Anas-Soft.vercel.app/update.json";
-        async function checkAppUpdate() {
-
-            try {
-
-                const response = await fetch(UPDATE_JSON_URL + "?t=" + Date.now());
-
-                const data = await response.json();
-
-                // مقارنة الإصدارات
-                if (data.version !== CURRENT_VERSION) {
-
-                    showUpdateDialog(data);
-
-                }
-
-            } catch (err) {
-
-                console.log("فشل فحص التحديث");
-
-            }
-
-        }
-
-        function showUpdateDialog(data) {
-
-            const updateBox = document.createElement("div");
-
-            updateBox.innerHTML = `
-    
-    <div style="
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:rgba(0,0,0,0.85);
-        z-index:999999;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        padding:20px;
-    ">
-    
-        <div style="
-            background:#1e293b;
-            width:100%;
-            max-width:400px;
-            border-radius:20px;
-            padding:25px;
-            text-align:center;
-            color:white;
-            border:2px solid #38bdf8;
-        ">
-        
-            <h2 style="color:#38bdf8;">
-                🚀 تحديث جديد متوفر
-            </h2>
-
-            <p style="margin-top:15px;">
-                ${data.message}
-            </p>
-
-            <button onclick="window.location.href='${data.apk}'"
-            style="
-                width:100%;
-                margin-top:20px;
-                padding:14px;
-                border:none;
-                border-radius:12px;
-                background:#10b981;
-                color:white;
-                font-size:18px;
-                font-weight:bold;
-                cursor:pointer;
-            ">
-                تحديث الآن
-            </button>
-
-        </div>
-
-    </div>
-    
-    `;
-
-            document.body.appendChild(updateBox);
-
-        }
-
-        // فحص التحديث عند فتح التطبيق
-        window.addEventListener("load", () => {
-
-            setTimeout(() => {
-
-                checkAppUpdate();
-
-            }, 3000);
-
-        });
-    </script>
-
     <style>
         :root {
             --bg: linear-gradient(135deg, #0f172a, #1e293b);
@@ -367,230 +255,12 @@
             z-index: 2000
         }
 
-        :root {
-            --bg: linear-gradient(135deg, #0f172a, #1e293b);
-            --card: #1e293b;
-            --text: #f8fafc;
-            --accent: #38bdf8;
-            --input-bg: rgba(0, 0, 0, 0.2);
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --wa: #25d366;
-            --fb: #1877f2;
-            --sms: #f59e0b;
-            --mail: #ea4335;
-            --call: #6366f1
-        }
-
         [data-theme="light"] {
             --bg: #f1f5f9;
             --card: #ffffff;
             --text: #1e293b;
             --accent: #0284c7;
             --input-bg: #f8fafc
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            transition: background 0.3s, color 0.3s, border-color 0.3s
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Cairo', sans-serif
-        }
-
-        .main-card {
-            background: var(--card);
-            width: 100%;
-            max-width: 500px;
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            width: 35px;
-            height: 35px;
-            background: var(--input-bg);
-            border: 1px solid var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            z-index: 10
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px
-        }
-
-        .header h1 {
-            color: var(--accent);
-            margin: 0;
-            font-size: 1.8rem
-        }
-
-        .keys-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px
-        }
-
-        .keys-row input {
-            width: 100%;
-            padding: 12px;
-            background: var(--input-bg);
-            border: 1px solid var(--accent);
-            color: var(--text);
-            border-radius: 12px;
-            text-align: center;
-            outline: none
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 100px;
-            background: var(--input-bg);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 15px;
-            padding: 15px;
-            color: var(--text);
-            resize: none;
-            margin-bottom: 15px;
-            outline: none;
-            font-family: inherit
-        }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px
-        }
-
-        .btn {
-            padding: 12px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px
-        }
-
-        .btn:active {
-            transform: scale(0.95)
-        }
-
-        .btn-enc {
-            background: var(--danger)
-        }
-
-        .btn-dec {
-            background: var(--success)
-        }
-
-        .btn-clr {
-            background: #64748b;
-            grid-column: span 2
-        }
-
-        .list-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 15px;
-            margin-bottom: 8px;
-            border: none;
-            color: white;
-            font-weight: bold;
-            text-decoration: none
-        }
-
-        #output-container {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            border: 1px dashed var(--accent);
-            text-align: center;
-            color: var(--accent);
-            word-break: break-all
-        }
-
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 25px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            padding-top: 15px
-        }
-
-        .nav-item {
-            cursor: pointer;
-            color: var(--accent);
-            font-size: 0.8rem;
-            text-align: center
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(4px)
-        }
-
-        .modal {
-            background: var(--card);
-            border-radius: 25px;
-            padding: 25px;
-            width: 90%;
-            max-width: 420px;
-            border: 1px solid var(--accent);
-            color: var(--text)
-        }
-
-        #toast {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--success);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            transition: 0.5s;
-            z-index: 2000
         }
 
         .anas-jpg-logo {
@@ -602,24 +272,97 @@
             vertical-align: middle !important;
             box-shadow: 0 0 5px rgba(56, 189, 248, 0.3) !important
         }
+
+        .admin-panel {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .admin-panel h3 {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .admin-panel input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: var(--input-bg);
+            border: 1px solid var(--accent);
+            color: var(--text);
+            border-radius: 8px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .admin-panel .btn-sm {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            margin: 3px;
+        }
+
+        .admin-panel .user-list {
+            margin-top: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .admin-panel .user-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .admin-panel .user-item .del-btn {
+            color: var(--danger);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 14px;
+        }
+
+        .admin-panel .user-item .del-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .admin-panel .sync-status {
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 8px;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- ===== شاشة تسجيل الدخول ===== -->
     <div id="login-screen"
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;">
         <div class="main-card" style="text-align: center;">
             <h2 style="color: var(--accent);">🔐 نظام الوصول الآمن</h2>
             <p>يرجى إدخال البيانات للوصول إلى طيف المقاومة</p>
-            <div style="margin-top: 20px;"><input type="text" id="username" placeholder="اسم المستخدم"
-                    style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><input
-                    type="password" id="password" placeholder="كلمة المرور"
-                    style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);"><button
-                    class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button></div>
+            <div style="margin-top: 20px;">
+                <input type="text" id="username" placeholder="اسم المستخدم"
+                    style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
+                <input type="password" id="password" placeholder="كلمة المرور"
+                    style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
+                <button class="btn btn-dec" style="width: 100%;" onclick="checkAuth()">دخول</button>
+            </div>
             <p id="auth-error" style="color: var(--danger); margin-top: 10px; display: none;">❌ بيانات الاعتماد غير
                 صحيحة!</p>
-            <br>
-
 
             <hr style="margin: 20px 0; border: 1px solid #ccc;">
 
@@ -629,24 +372,25 @@
             <input type="password" id="req-password" placeholder="كلمة المرور المقترحة"
                 style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--accent); background: var(--input-bg); color: var(--text);">
             <button class="btn btn-dec" onclick="requestAccount()" style="width: 100%; background-color: #28a745;">تقديم
-                الطلب (عبر
-                واتساب)</button>
-
-            <p id="auth-error" style="color: red; display: none; margin-top: 10px;"></p>
+                الطلب (عبر واتساب)</button>
             <br>
-
         </div>
     </div>
+
+    <!-- ===== المحتوى الرئيسي ===== -->
     <div id="toast">✅ تم بنجاح</div>
     <div class="main-card">
         <div class="header">
             <div class="theme-toggle" onclick="toggleTheme()" id="themeBtn"
                 style="position: absolute; top: 15px; left: 15px; cursor: pointer; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent);">
                 🌞</div>
-            <h1 style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span>طيف
-                    المقاومة</span><img src="anas.jpg" alt="Team Logo" class="anas-jpg-logo"></h1>
+            <h1 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>طيف المقاومة</span>
+                <img src="anas.jpg" alt="Team Logo" class="anas-jpg-logo">
+            </h1>
             <p>درعك المتين في فضاء الخصوصية</p>
         </div>
+
         <div id="dailyRotorDisplay"
             style="margin-bottom: 15px; padding: 15px; border: 1px solid var(--accent); border-radius: 12px; background: rgba(56, 189, 248, 0.05); text-align: center;">
             <div id="welcome-msg"
@@ -654,141 +398,437 @@
             <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">مفاتيح العمليات المعتمدة لهذا اليوم:</div>
             <div id="rotor-values"
                 style="font-weight: bold; font-size: 1rem; color: var(--warning); letter-spacing: 1px;"></div><br>
-            <div class="keys-row"><input type="text" id="k1" placeholder="مفتاح 1"><input type="text" id="k2"
-                    placeholder="مفتاح 2"><input type="text" id="k3" placeholder="مفتاح 3"></div><textarea id="msg"
-                placeholder="أدخل النص المراد تأمينه..."></textarea>
-            <div class="btn-grid"><button class="btn btn-enc" onclick="process(true)"><svg viewBox="0 0 24 24">
+            <div class="keys-row">
+                <input type="text" id="k1" placeholder="مفتاح 1">
+                <input type="text" id="k2" placeholder="مفتاح 2">
+                <input type="text" id="k3" placeholder="مفتاح 3">
+            </div>
+            <textarea id="msg" placeholder="أدخل النص المراد تأمينه..."></textarea>
+            <div class="btn-grid">
+                <button class="btn btn-enc" onclick="process(true)">
+                    <svg viewBox="0 0 24 24">
                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                    </svg>تشفير </button><button class="btn btn-dec" onclick="process(false)"><svg viewBox="0 0 24 24">
+                    </svg>تشفير
+                </button>
+                <button class="btn btn-dec" onclick="process(false)">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65z" />
-                    </svg>فك تشفير </button><button class="btn btn-clr" onclick="clearAll()"><svg viewBox="0 0 24 24">
+                    </svg>فك تشفير
+                </button>
+                <button class="btn btn-clr" onclick="clearAll()">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                    </svg>تفريغ البيانات </button></div>
+                    </svg>تفريغ البيانات
+                </button>
+            </div>
             <div id="output-container">في انتظار البيانات...</div>
-            <div class="btn-grid" style="margin-top:10px;"><button class="btn" style="background:var(--warning)"
-                    onclick="copyText()"><svg viewBox="0 0 24 24">
+            <div class="btn-grid" style="margin-top:10px;">
+                <button class="btn" style="background:var(--warning)" onclick="copyText()">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z" />
-                    </svg>نسخ النتيجة </button><button class="btn" style="background:var(--accent)"
-                    onclick="openModal('modal-share')"><svg viewBox="0 0 24 24">
+                    </svg>نسخ النتيجة
+                </button>
+                <button class="btn" style="background:var(--accent)" onclick="openModal('modal-share')">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-                    </svg>مشاركة آمنة </button></div>
+                    </svg>مشاركة آمنة
+                </button>
+            </div>
+
+            <!-- ===== واجهة إدارة المستخدمين ===== -->
+            <div id="adminPanel" class="admin-panel" style="display: none;">
+                <h3>👑 إدارة المستخدمين</h3>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <input type="text" id="newUserName" placeholder="اسم المستخدم الجديد" style="flex: 2;">
+                    <input type="password" id="newUserPass" placeholder="كلمة المرور" style="flex: 2;">
+                    <button class="btn btn-sm" style="background: var(--success);" onclick="addUser()">➕ إضافة</button>
+                </div>
+                <div class="user-list" id="userListDisplay">
+                    <div style="text-align: center; color: #6c757d; padding: 10px;">جاري تحميل المستخدمين...</div>
+                </div>
+                <div class="sync-status" id="syncStatus">🔄 جاري المزامنة مع السحابة...</div>
+                <button class="btn btn-sm"
+                    style="background: var(--warning); margin-top: 8px; width: 100%; color: #000;"
+                    onclick="refreshUsers()">🔄 تحديث من السحابة</button>
+            </div>
+
             <div class="bottom-nav">
-                <div class="nav-item" onclick="openModal('modal-guide')"><svg viewBox="0 0 24 24">
+                <div class="nav-item" onclick="openModal('modal-guide')">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
-                    </svg>الدليل </div>
-                <div class="nav-item" onclick="openModal('modal-system')"><svg viewBox="0 0 24 24">
+                    </svg>الدليل
+                </div>
+                <div class="nav-item" onclick="openModal('modal-system')">
+                    <svg viewBox="0 0 24 24">
                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                    </svg>عن النظام </div>
-                <div class="nav-item" onclick="openModal('modal-dev')"><svg viewBox="0 0 24 24">
+                    </svg>عن النظام
+                </div>
+                <div class="nav-item" onclick="openModal('modal-dev')">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                    </svg>المهندس </div>
+                    </svg>المهندس
+                </div>
             </div>
         </div>
+
+        <!-- ===== المودالات ===== -->
         <div class="overlay" id="modal-guide">
             <div class="modal">
                 <h2>📘 دليل الاستخدام</h2>
                 <div class="guide-step">1️⃣ أدخل المفاتيح الثلاثة (يجب حفظها لفك التشفير لاحقاً).</div>
                 <div class="guide-step">2️⃣ اكتب نصك في المربع الكبير واضغط "تشفير".</div>
-                <div class="guide-step">3️⃣ لفك التشفير، ضع النص المشفر ونفس المفاتيح واضغط "فك".</div><button
-                    class="btn btn-clr" style="width:100%" onclick="closeModals()">فهمت</button>
+                <div class="guide-step">3️⃣ لفك التشفير، ضع النص المشفر ونفس المفاتيح واضغط "فك".</div>
+                <button class="btn btn-clr" style="width:100%" onclick="closeModals()">فهمت</button>
             </div>
         </div>
+
         <div class="overlay" id="modal-system">
             <div class="modal">
                 <h2>⚙️ عن نظام طيف</h2>
-                <div class="guide-step">🔒 <b>تشفير ثلاثي:</b>يعتمد النظام على دمج 3 مفاتيح مختلفة لإنتاج خوارزمية إزاحة
-                    معقدة يصعب كسرها.</div>
-                <div class="guide-step">📱 <b>خصوصية كاملة:</b>تتم عملية المعالجة داخل متصفحك فقط، ولا يتم تخزين أو
-                    إرسال أي نصوص للسيرفر.</div>
-                <div class="guide-step">🌍 <b>دعم لغوي:</b>النظام يدعم اللغة العربية والإنجليزية والأرقام والرموز الخاصة
-                    بدقة عالية.</div><button class="btn btn-clr" style="width:100%"
-                    onclick="closeModals()">إغلاق</button>
+                <div class="guide-step">🔒 <b>تشفير ثلاثي:</b> يعتمد النظام على دمج 3 مفاتيح مختلفة.</div>
+                <div class="guide-step">📱 <b>خصوصية كاملة:</b> تتم المعالجة داخل متصفحك فقط.</div>
+                <div class="guide-step">🌍 <b>دعم لغوي:</b> يدعم العربية والإنجليزية والأرقام.</div>
+                <button class="btn btn-clr" style="width:100%" onclick="closeModals()">إغلاق</button>
             </div>
         </div>
+
         <div class="overlay" id="modal-dev">
             <div class="modal">
-                <hr style="opacity:0.1; margin:20px 0;">
                 <h2>👨‍💻 تواصل مع المهندس</h2>
-                <h2 style="border:none; margin:0;">طيف المقاومة </h2>
-                <h2 style="color:var(--accent); font-weight:bold;">خبير أنظمة التشفير والأمن السيبراني</h2><a
-                    href="https://wa.me/967734559604" class="list-btn" style="background:var(--wa);"><svg
-                        viewBox="0 0 24 24">
+                <a href="https://wa.me/967734559604" class="list-btn" style="background:var(--wa);">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543 1.64-1.64 2.543-3.834 2.543-6.155 0-2.32-.903-4.514-2.543-6.154-1.641-1.64-3.836-2.543-6.157-2.543zm5.077 11.231c-.22.618-1.282 1.138-1.782 1.21-.499.073-1.12.131-1.767-.132-1.422-.581-2.529-1.291-3.473-2.235-.944-.944-1.654-2.051-2.235-3.473-.263-.647-.205-1.268-.132-1.767.072-.5.592-1.561 1.21-1.782.164-.06.335-.089.506-.088.132 0 .265.023.393.069.15.054.293.208.358.461l.525 1.267c.101.244.053.472-.11.639l-.441.455c-.147.151-.162.378-.037.55.303.418.66.793 1.062 1.116.338.272.713.491 1.114.65.178.07.351.05.474-.078l.455-.441c.167-.163.395-.211.639-.11l1.267.525c.253.065.407.208.461.358.046.128.069.261.069.393-.001.171-.03.342-.091.506z" />
-                    </svg><span>واتساب</span></a><a href="https://www.facebook.com/share/1BiQ8SXXyM/" class="list-btn"
-                    style="background:var(--fb);"><svg viewBox="0 0 24 24">
+                    </svg><span>واتساب</span>
+                </a>
+                <a href="https://www.facebook.com/share/1BiQ8SXXyM/" class="list-btn" style="background:var(--fb);">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg><span>فيسبوك</span></a><a href="mailto:za90za90ascii@gmail.com" class="list-btn"
-                    style="background:var(--mail);"><svg viewBox="0 0 24 24">
+                    </svg><span>فيسبوك</span>
+                </a>
+                <a href="mailto:za90za90ascii@gmail.com" class="list-btn" style="background:var(--mail);">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg><span>البريد الإلكتروني</span></a><a href="sms:+967734559604" class="list-btn"
-                    style="background:var(--sms);"><svg viewBox="0 0 24 24">
+                    </svg><span>البريد الإلكتروني</span>
+                </a>
+                <a href="sms:+967734559604" class="list-btn" style="background:var(--sms);">
+                    <svg viewBox="0 0 24 24">
                         <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg><span>رسالة نصية SMS</span></a><a href="tel:+967734559604" class="list-btn"
-                    style="background:var(--call);"><svg viewBox="0 0 24 24">
+                    </svg><span>رسالة نصية SMS</span>
+                </a>
+                <a href="tel:+967734559604" class="list-btn" style="background:var(--call);">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.79 6.35 8.59 5.16 8.59 3.92 8.59 3.41 8.18 3 7.67 3H4.19C3.68 3 3.25 3.4 3.25 3.92 3.25 13.24 10.74 20.75 20.01 20.75c.51 0 .92-.41.92-.92v-3.53c0-.51-.41-.92-.92-.92z" />
-                    </svg><span>اتصال هاتفي</span></a><button class="btn btn-clr" style="width:100%; margin-top:5px;"
-                    onclick="closeModals()">إغلاق</button>
+                    </svg><span>اتصال هاتفي</span>
+                </a>
+                <button class="btn btn-clr" style="width:100%; margin-top:5px;" onclick="closeModals()">إغلاق</button>
             </div>
         </div>
+
         <div class="overlay" id="modal-share">
             <div class="modal">
-                <h2>🚀 مشاركة آمنة</h2><button class="list-btn" style="background:var(--wa);"
-                    onclick="doShare('wa')"><svg viewBox="0 0 24 24">
+                <h2>🚀 مشاركة آمنة</h2>
+                <button class="list-btn" style="background:var(--wa);" onclick="doShare('wa')">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M12.031 6.172c-2.32 0-4.515.903-6.154 2.543-1.639 1.639-2.542 3.834-2.542 6.154 0 1.256.265 2.479.789 3.605l-1.011 3.702 3.8-.996c1.085.59 2.298.901 3.541.902h.005c2.32 0 4.514-.903 6.154-2.543z" />
-                    </svg><span>واتساب</span></button><button class="list-btn" style="background:var(--fb);"
-                    onclick="doShare('fb')"><svg viewBox="0 0 24 24">
+                    </svg><span>واتساب</span>
+                </button>
+                <button class="list-btn" style="background:var(--fb);" onclick="doShare('fb')">
+                    <svg viewBox="0 0 24 24">
                         <path
                             d="M24 12.073c0-6.627-5.373-12.073-12-12.073s-12 5.446-12 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg><span>فيسبوك</span></button><button class="list-btn" style="background:var(--sms);"
-                    onclick="doShare('sms')"><svg viewBox="0 0 24 24">
+                    </svg><span>فيسبوك</span>
+                </button>
+                <button class="list-btn" style="background:var(--sms);" onclick="doShare('sms')">
+                    <svg viewBox="0 0 24 24">
                         <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg><span>رسالة نصية SMS</span></button><button class="btn btn-clr" style="width:100%"
-                    onclick="closeModals()">إلغاء</button>
+                    </svg><span>رسالة نصية SMS</span>
+                </button>
+                <button class="btn btn-clr" style="width:100%" onclick="closeModals()">إلغاء</button>
             </div>
         </div>
+
         <script>
-            // @ts-nocheck // @ts-nocheck
-            // كود قفل المطور - خاص بك فقط
+            // =============================================
+            // إعدادات JSONBin.io - قم بتغييرها ببياناتك
+            // =============================================
+            const config = {
+    API_KEY: "$2a$10$krZzLSnc1waC/9r7Kv4VY.DKxOVBKzaIbY0grssv8e3HqiV0v1PMm",
+    BIN_ID: "ضع_Bin_ID_الجديد_هنا"
+};
 
-            const devSecretKey = "Anas@2026"; // كلمة السر الخاصة بك لتطوير الكود
+fetch(`https://api.jsonbin.io/v3/b/${config.BIN_ID}`, {
+    method: 'GET',
+    headers: { 'X-Master-Key': config.API_KEY }
+})
+.then(res => {
+    console.log("✅ الحالة:", res.status);
+    return res.json();
+})
+.then(data => console.log("📋 البيانات:", data))
+.catch(err => console.error("❌ خطأ:", err));
 
-            function developerAccess() {
-                let key = prompt("أدخل رمز الوصول للمطور:");
-                if (key === devSecretKey) {
-                    alert("أهلاً بك يا مهندس.. تم تفعيل صلاحيات التعديل");
-                    // هنا يمكنك وضع أي كود يسهل عليك الاختبار
-                    console.log("Developer Mode Active");
-                } else {
-                    alert("خطأ! لا تملك صلاحية الوصول للسورس كود.");
+            // =============================================
+            // قائمة المستخدمين الافتراضية (في حال فشل التحميل)
+            // =============================================
+            let authorizedUsers = [
+                { user: "anas", pass: "anas123" },
+                { user: "admin", pass: "Admin2026@Secure" }
+            ];
+
+            // كلمة المرور الخاصة بمدير المستخدمين
+            const ADMIN_PASSWORD = "Admin2026@Secure";
+            const myWhatsAppNumber = "967734559604";
+
+            // =============================================
+            // دوال التعامل مع JSONBin.io
+            // =============================================
+
+            // تحميل المستخدمين من السحابة
+            async function loadUsersFromCloud() {
+                try {
+                    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}/latest`, {
+                        headers: {
+                            'X-Master-Key': JSONBIN_CONFIG.API_KEY
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const users = data.record?.users || [];
+
+                    if (users.length > 0) {
+                        authorizedUsers = users;
+                        return true;
+                    }
+                    return false;
+                } catch (error) {
+                    console.error("❌ فشل تحميل المستخدمين من السحابة:", error);
+                    return false;
                 }
             }
 
+            // حفظ المستخدمين في السحابة
+            async function saveUsersToCloud(users) {
+                try {
+                    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': JSONBIN_CONFIG.API_KEY
+                        },
+                        body: JSON.stringify({ users: users })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error("❌ فشل حفظ المستخدمين في السحابة:", error);
+                    return null;
+                }
+            }
+
+            // عرض حالة المزامنة
+            function updateSyncStatus(message, isSuccess = true) {
+                const statusEl = document.getElementById('syncStatus');
+                if (statusEl) {
+                    statusEl.textContent = message;
+                    statusEl.style.color = isSuccess ? '#10b981' : '#ef4444';
+                }
+            }
+
+            // =============================================
+            // دوال إدارة المستخدمين (مع السحابة)
+            // =============================================
+
+            // تحميل وعرض المستخدمين
+            async function refreshUsers() {
+                updateSyncStatus('🔄 جاري التحميل من السحابة...', true);
+                const loaded = await loadUsersFromCloud();
+                if (loaded) {
+                    renderUserList();
+                    updateSyncStatus('✅ تم التحميل من السحابة بنجاح', true);
+                } else {
+                    updateSyncStatus('⚠️ فشل التحميل، جاري استخدام القائمة المحلية', false);
+                    renderUserList();
+                }
+            }
+
+            // إضافة مستخدم جديد
+            async function addUser() {
+                const nameInput = document.getElementById('newUserName');
+                const passInput = document.getElementById('newUserPass');
+                const username = nameInput.value.trim();
+                const password = passInput.value.trim();
+
+                if (!username || !password) {
+                    showToast("⚠️ يرجى إدخال اسم المستخدم وكلمة المرور");
+                    return;
+                }
+
+                // التحقق من عدم تكرار الاسم
+                if (authorizedUsers.some(u => u.user.toLowerCase() === username.toLowerCase())) {
+                    showToast("⚠️ اسم المستخدم موجود مسبقاً");
+                    return;
+                }
+
+                // إضافة المستخدم محلياً
+                authorizedUsers.push({ user: username, pass: password });
+                nameInput.value = '';
+                passInput.value = '';
+
+                // حفظ في السحابة
+                updateSyncStatus('🔄 جاري الحفظ في السحابة...', true);
+                const result = await saveUsersToCloud(authorizedUsers);
+
+                if (result) {
+                    renderUserList();
+                    updateSyncStatus('✅ تم حفظ المستخدم في السحابة بنجاح', true);
+                    showToast("✅ تم إضافة المستخدم: " + username);
+                } else {
+                    // التراجع عن الإضافة إذا فشل الحفظ
+                    authorizedUsers.pop();
+                    updateSyncStatus('❌ فشل الحفظ في السحابة، حاول مرة أخرى', false);
+                    showToast("❌ فشل الحفظ في السحابة!");
+                }
+            }
+
+            // حذف مستخدم
+            async function deleteUser(index) {
+                if (confirm(`هل أنت متأكد من حذف المستخدم "${authorizedUsers[index].user}"؟`)) {
+                    const deletedUser = authorizedUsers[index].user;
+                    authorizedUsers.splice(index, 1);
+
+                    // حفظ في السحابة
+                    updateSyncStatus('🔄 جاري الحذف من السحابة...', true);
+                    const result = await saveUsersToCloud(authorizedUsers);
+
+                    if (result) {
+                        renderUserList();
+                        updateSyncStatus('✅ تم حذف المستخدم من السحابة', true);
+                        showToast("🗑️ تم حذف المستخدم: " + deletedUser);
+                    } else {
+                        // استعادة المستخدم إذا فشل الحذف
+                        showToast("❌ فشل الحذف من السحابة!");
+                        await refreshUsers(); // إعادة تحميل القائمة
+                    }
+                }
+            }
+
+            // عرض قائمة المستخدمين
+            function renderUserList() {
+                const container = document.getElementById('userListDisplay');
+                if (authorizedUsers.length === 0) {
+                    container.innerHTML = '<div style="color: #6c757d; text-align: center; padding: 10px;">لا يوجد مستخدمين</div>';
+                    return;
+                }
+                container.innerHTML = authorizedUsers.map((u, i) => `
+                    <div class="user-item">
+                        <span>👤 ${u.user}</span>
+                        <span>
+                            <span style="color: #6c757d; font-size: 12px;">${u.pass}</span>
+                            <button class="del-btn" onclick="deleteUser(${i})">✖</button>
+                        </span>
+                    </div>
+                `).join('');
+            }
+
+            // =============================================
+            // دوال المصادقة
+            // =============================================
+
+            async function checkAuth() {
+                const uInput = document.getElementById('username').value.toLowerCase().trim();
+                const pInput = document.getElementById('password').value.trim();
+                const errorMsg = document.getElementById('auth-error');
+
+                if (!uInput || !pInput) {
+                    showToast("⚠️ يرجى إدخال الاسم وكلمة المرور");
+                    return false;
+                }
+
+                // تأكد من تحميل المستخدمين من السحابة أولاً
+                await refreshUsers();
+
+                // التحقق من كلمة مرور المدير
+                if (uInput === 'admin' && pInput === ADMIN_PASSWORD) {
+                    document.getElementById('login-screen').style.display = 'none';
+                    showToast("👑 مرحباً مدير النظام");
+                    updateDailySystem(uInput);
+                    loginSuccess(uInput);
+                    setTimeout(() => {
+                        document.getElementById('adminPanel').style.display = 'block';
+                        renderUserList();
+                        updateSyncStatus('✅ متصل بالسحابة', true);
+                    }, 500);
+                    return true;
+                }
+
+                // التحقق من المستخدمين
+                const found = authorizedUsers.find(account =>
+                    account.user.toLowerCase() === uInput &&
+                    account.pass === pInput
+                );
+
+                if (found) {
+                    document.getElementById('login-screen').style.display = 'none';
+                    showToast("🔓 أهلاً بك " + uInput);
+                    updateDailySystem(uInput);
+                    loginSuccess(uInput);
+                    return true;
+                } else {
+                    errorMsg.innerText = "❌ اسم المستخدم أو كلمة المرور غير صحيحة";
+                    errorMsg.style.display = 'block';
+                    document.getElementById('password').value = "";
+                    return false;
+                }
+            }
+
+            function loginSuccess(username) {
+                document.getElementById('login-screen').style.display = 'none';
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('loginUser', username);
+                localStorage.setItem('loginTime', Date.now());
+                updateDailySystem(username);
+                showToast("✅ تم تسجيل الدخول");
+            }
+
+            // =============================================
+            // دوال النظام الأساسية
+            // =============================================
 
             const alphabet = [" ", "ا", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي", "ء", "آ", "أ", "ؤ", "إ", "ئ", "ة", "ى", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",", "!", "؟", "(", ")", "@", "#", "$", "+", "-", "*", "/", "=", "_", "%", "&"];
 
             function showToast(m) {
                 const t = document.getElementById('toast');
-                t.innerText = m; t.style.top = '30px';
+                t.innerText = m;
+                t.style.top = '30px';
                 setTimeout(() => t.style.top = '-100px', 2500);
             }
 
             function process(isEnc) {
                 const msg = document.getElementById('msg').value.trim();
                 if (!msg) { showToast("⚠️ أدخل النص!"); return; }
-                const v1 = (s => { let v = 0; for (let i = 0; i < s.length; i++)v += s.charCodeAt(i); return v; })(document.getElementById('k1').value);
-                const v2 = (s => { let v = 0; for (let i = 0; i < s.length; i++)v += s.charCodeAt(i); return v; })(document.getElementById('k2').value);
-                const v3 = (s => { let v = 0; for (let i = 0; i < s.length; i++)v += s.charCodeAt(i); return v; })(document.getElementById('k3').value);
+                const v1 = (s => { let v = 0; for (let i = 0; i < s.length; i++) v += s.charCodeAt(i); return v; })(document.getElementById('k1').value);
+                const v2 = (s => { let v = 0; for (let i = 0; i < s.length; i++) v += s.charCodeAt(i); return v; })(document.getElementById('k2').value);
+                const v3 = (s => { let v = 0; for (let i = 0; i < s.length; i++) v += s.charCodeAt(i); return v; })(document.getElementById('k3').value);
 
                 const mod = alphabet.length;
                 let shift = (v1 + v2 + v3) % mod;
@@ -805,81 +845,37 @@
 
             function copyText() {
                 const txt = document.getElementById('output-container').innerText;
-
-                // التحقق من وجود نص صالح للنسخ [cite: 89, 90]
                 if (!txt || txt.includes("في انتظار")) {
                     showToast("⚠️ لا يوجد نص لنسخه");
                     return;
                 }
-
-                // المحاولة الأولى: استخدام Clipboard API الحديثة
                 if (navigator.clipboard && window.isSecureContext) {
                     navigator.clipboard.writeText(txt).then(() => {
                         showToast("📋 تم النسخ بنجاح");
-                    }).catch(err => {
-                        // إذا فشلت الطريقة الحديثة، ننتقل للطريقة التقليدية
+                    }).catch(() => {
                         copyFallback(txt);
                     });
                 } else {
-                    // الطريقة التقليدية للمتصفحات غير المؤمنة أو القديمة
                     copyFallback(txt);
                 }
             }
 
-            function updateDailySystem(username) {
-                const now = new Date();
-                const d = now.getDate();
-                const m = now.getMonth() + 1;
-                const y = now.getFullYear();
-
-                // أسماء تمويه عسكرية
-                const names = ["صقر", "رعد", "برق", "درع", "زلزال", "كاسر", "صارم", "فاتح", "مرصاد", "شاهين"];
-                //, "وينان", "نصر", "حلفان", "ريدان", "بلع", "ناصه", "مضرح", "صامح"];
-
-                // معادلة برمجية تولد أرقام ثابتة لليوم ومختلفة للغد
-                const seed = (d * m * y);
-                const name = names[seed % names.length];
-                const r1 = "A" + ((seed * 7) % 89 + 10);
-                const r2 = "B" + ((seed * 13) % 89 + 10);
-                const r3 = ((seed * 19) % 90 + 10);
-
-                // 1. عرض الترحيب باسم المستخدم
-                document.getElementById('welcome-msg').innerText = "أهلاً بك   " + username;
-
-                // 2. عرض القيم في الجدول
-                document.getElementById('rotor-values').innerHTML =
-                    `🔑 ${name} | ⚙️ ${r1} | ⚙️ ${r2} | ⚙️ ${r3}`;
-
-                // 3. وضع القيم تلقائياً في خانات التشفير لسهولة الاستخدام
-                document.getElementById('k1').value = r1;
-                document.getElementById('k2').value = r2;
-                document.getElementById('k3').value = r3;
-            }
-
-
-
-            // دالة النسخ الاحتياطية لضمان العمل على الجوال والمتصفحات المحلية
             function copyFallback(text) {
                 const textArea = document.createElement("textarea");
                 textArea.value = text;
-
-                // إخفاء العنصر عن المستخدم [cite: 15]
                 textArea.style.position = "fixed";
                 textArea.style.left = "-9999px";
                 textArea.style.top = "0";
                 document.body.appendChild(textArea);
-
                 textArea.focus();
                 textArea.select();
-                textArea.setSelectionRange(0, 99999); // للهواتف
-
+                textArea.setSelectionRange(0, 99999);
                 try {
                     document.execCommand('copy');
-                    showToast("📋 تم النسخ (بنجاح )");
+                    showToast("📋 تم النسخ");
                 } catch (err) {
                     showToast("❌ فشل النسخ، يرجى النسخ يدوياً");
                 }
-
                 document.body.removeChild(textArea);
             }
 
@@ -894,7 +890,9 @@
             }
 
             function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+
             function closeModals() { document.querySelectorAll('.overlay').forEach(o => o.style.display = 'none'); }
+
             function clearAll() {
                 document.getElementById('msg').value = "";
                 document.querySelectorAll('input').forEach(i => i.value = "");
@@ -904,7 +902,6 @@
             function toggleTheme() {
                 const html = document.documentElement;
                 const btn = document.getElementById('themeBtn');
-
                 if (html.getAttribute('data-theme') === 'light') {
                     html.removeAttribute('data-theme');
                     btn.innerText = '🌞';
@@ -916,192 +913,98 @@
                 }
             }
 
-            // كود لتطبيق الوضع المحفوظ فور فتح الصفحة (يدعم العمل أوفلاين)
-            window.onload = function () {
+            function updateDailySystem(username) {
+                const now = new Date();
+                const d = now.getDate();
+                const m = now.getMonth() + 1;
+                const y = now.getFullYear();
+                const names = ["صقر", "رعد", "برق", "درع", "زلزال", "كاسر", "صارم", "فاتح", "مرصاد", "شاهين"];
+                const seed = (d * m * y);
+                const name = names[seed % names.length];
+                const r1 = "A" + ((seed * 7) % 89 + 10);
+                const r2 = "B" + ((seed * 13) % 89 + 10);
+                const r3 = ((seed * 19) % 90 + 10);
+
+                document.getElementById('welcome-msg').innerText = "أهلاً بك " + username;
+                document.getElementById('rotor-values').innerHTML = `🔑 ${name} | ⚙️ ${r1} | ⚙️ ${r2} | ⚙️ ${r3}`;
+                document.getElementById('k1').value = r1;
+                document.getElementById('k2').value = r2;
+                document.getElementById('k3').value = r3;
+            }
+
+            function requestAccount() {
+                const username = document.getElementById('req-username').value.trim();
+                const password = document.getElementById('req-password').value.trim();
+                if (!username || !password) {
+                    showToast("⚠️ أكمل بيانات الطلب");
+                    return;
+                }
+                const exists = authorizedUsers.some(account =>
+                    account.user.toLowerCase() === username.toLowerCase()
+                );
+                if (exists) {
+                    showToast("⚠️ اسم المستخدم مستخدم مسبقاً");
+                    return;
+                }
+                const messageText =
+                    `طلب انضمام جديد إلى طيف المقاومة 🛡️
+
+👤 اسم المستخدم: ${username}
+🔑 كلمة المرور المقترحة: ${password}
+{ user: "${username}", pass: "${password}" }`;
+
+                const encodedMessage = encodeURIComponent(messageText);
+                window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`, '_blank');
+                showToast("📲 تم فتح الواتساب لإرسال الطلب");
+            }
+
+            // =============================================
+            // فتح لوحة الإدارة
+            // =============================================
+
+            function openAdminPanel() {
+                const pass = prompt("🔐 أدخل كلمة مرور المدير للوصول إلى إدارة المستخدمين:");
+                if (pass === ADMIN_PASSWORD) {
+                    document.getElementById('adminPanel').style.display = 'block';
+                    refreshUsers();
+                    showToast("👑 مرحباً بك في لوحة إدارة المستخدمين");
+                } else if (pass !== null) {
+                    showToast("❌ كلمة المرور غير صحيحة!");
+                }
+            }
+
+            // =============================================
+            // تهيئة الصفحة
+            // =============================================
+
+            window.addEventListener('load', async () => {
+                // تحميل المستخدمين من السحابة أولاً
+                updateSyncStatus('🔄 جاري الاتصال بالسحابة...', true);
+                const loaded = await loadUsersFromCloud();
+                if (loaded) {
+                    updateSyncStatus('✅ تم التحميل من السحابة', true);
+                    renderUserList();
+                } else {
+                    updateSyncStatus('⚠️ وضع غير متصل، جاري استخدام القائمة المحلية', false);
+                    renderUserList();
+                }
+
+                // تطبيق الوضع المحفوظ
                 const savedTheme = localStorage.getItem('theme');
                 if (savedTheme === 'light') {
                     document.documentElement.setAttribute('data-theme', 'light');
                     document.getElementById('themeBtn').innerText = '🌙';
                 }
-            }
 
-
-            // قائمة المستخدمين المصرح لهم (يمكنك إضافة أي عدد)
-            // قائمة المستخدمين المصرح لهم (قم بإضافة الأعضاء الجدد هنا بعد الموافقة عليهم عبر الواتساب)
-            const authorizedUsers = [
-                { user: "anas", pass: "anas123" },
-                { user: "ebrahem", pass: "ebrahem2026" },
-                { user: "sanad", pass: "sanad123" },
-                { user: "mohammed", pass: "moh123" },
-                { user: "ali", pass: "ali123" },
-                { user: "sala", pass: "sala123" },
-                { user: "moha", pass: "moha123" },
-                { user: "انس", pass: "سلا صالح" },
-                { user: "ahmed", pass: "ahmed123" },
-                { user: "محمد علي", pass: "123456789" },
-                { user: "ابو اسامه", pass: "S+A123" },
-                { user: "ابو ثائر", pass: "salasans" },
-                { user: "علي احمد", pass: "ali222" },
-                { user: "سلمان الوحش", pass: "salman" },
-                { user: "Anassoft", pass: "Anas456" },
-                { user: "خولان", pass: "123456" },
-                { user: "احمد", pass: "1234567" },
-                { user: "thaer", pass: "thaer123" }
-            ];
-            // رقم الهاتف الخاص بك لاستقبال الطلبات
-            const myWhatsAppNumber = "967734559604";
-
-            function checkAuth() {
-
-                const uInput = document.getElementById('username').value.toLowerCase().trim();
-                const pInput = document.getElementById('password').value.trim();
-                const errorMsg = document.getElementById('auth-error');
-
-                if (!uInput || !pInput) {
-
-                    showToast("⚠️ يرجى إدخال الاسم وكلمة المرور");
-                    return false;
-
-                }
-
-                // إذا يوجد إنترنت
-                if (navigator.onLine) {
-
-                    const found = authorizedUsers.find(account =>
-                        account.user.toLowerCase() === uInput &&
-                        account.pass === pInput
-                    );
-
-                    if (found) {
-
-                        document.getElementById('login-screen').style.display = 'none';
-
-                        showToast("🔓 أهلاً بك " + uInput);
-
-                        updateDailySystem(uInput);
-
-                        const now = new Date().getTime();
-
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('loginUser', uInput);
-                        localStorage.setItem('loginTime', now);
-
-                        // حفظ الحساب للعمل أوفلاين
-                        localStorage.setItem('offlineUser', uInput);
-                        localStorage.setItem('offlinePass', pInput);
-
-                    } else {
-
-                        errorMsg.innerText = "❌ اسم المستخدم أو كلمة المرور غير صحيحة";
-                        errorMsg.style.display = 'block';
-
-                        document.getElementById('password').value = "";
-
-                    }
-
-                } else {
-
-                    // دخول أوفلاين
-                    const savedUser = localStorage.getItem('offlineUser');
-                    const savedPass = localStorage.getItem('offlinePass');
-
-                    if (
-                        savedUser === uInput &&
-                        savedPass === pInput
-                    ) {
-
-                        document.getElementById('login-screen').style.display = 'none';
-
-                        showToast("📴 تم تسجيل الدخول أوفلاين");
-
-                        updateDailySystem(uInput);
-
-                        const now = new Date().getTime();
-
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('loginUser', uInput);
-                        localStorage.setItem('loginTime', now);
-
-                    } else {
-
-                        errorMsg.innerText = "❌ يجب تسجيل الدخول مرة واحدة مع الإنترنت أولاً";
-                        errorMsg.style.display = 'block';
-
-                        document.getElementById('password').value = "";
-
-                    }
-
-                }
-
-                return false;
-            }
-            function loginSuccess(username) {
-
-                document.getElementById('login-screen').style.display = 'none';
-
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('loginUser', username);
-                localStorage.setItem('loginTime', Date.now());
-
-                updateDailySystem(username);
-
-                showToast("✅ تم تسجيل الدخول");
-
-            }
-
-            function requestAccount() {
-
-                const username = document.getElementById('req-username').value.trim();
-                const password = document.getElementById('req-password').value.trim();
-
-                if (!username || !password) {
-                    showToast("⚠️ أكمل بيانات الطلب");
-                    return;
-                }
-
-                // التحقق هل الاسم مستخدم مسبقاً
-                const exists = authorizedUsers.some(account =>
-                    account.user.toLowerCase() === username.toLowerCase()
-                );
-
-                if (exists) {
-                    showToast("⚠️ اسم المستخدم مستخدم مسبقاً");
-                    return;
-                }
-
-                const messageText =
-                    `طلب انضمام جديد إلى إنيجما المقاومة 🛡️
-
-👤 اسم المستخدم: ${username}
-
-🔑 كلمة المرور المقترحة: ${password}
-
-
-{ user: "${username}", pass: "${password}" }`;
-
-                const encodedMessage = encodeURIComponent(messageText);
-
-                window.open(
-                    `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`,
-                    '_blank'
-                );
-
-                showToast("📲 تم فتح الواتساب لإرسال الطلب");
-            }
-
-            // حماية الصفحة وتحديثات الجلسة المحفوظة
-            window.addEventListener('load', () => {
+                // التحقق من الجلسة
                 const isLoggedIn = localStorage.getItem('isLoggedIn');
                 const loginTime = localStorage.getItem('loginTime');
                 const loginUser = localStorage.getItem('loginUser') || "المجاهد";
                 const now = new Date().getTime();
-
-                // مدة صلاحية الجلسة (10 دقائق)
                 const expiryDuration = 5 * 60 * 1000;
 
                 if (isLoggedIn === 'true' && loginTime) {
                     const timePassed = now - parseInt(loginTime);
-
                     if (timePassed < expiryDuration) {
                         document.getElementById('login-screen').style.display = 'none';
                         showToast("✅ تم استعادة الجلسة");
@@ -1113,6 +1016,17 @@
                 } else {
                     clearSession();
                 }
+
+                // اختصار لفتح لوحة الإدارة (النقر على الشعار 3 مرات)
+                let clickCount = 0;
+                document.querySelector('.header h1').addEventListener('click', function () {
+                    clickCount++;
+                    if (clickCount === 3) {
+                        clickCount = 0;
+                        openAdminPanel();
+                    }
+                    setTimeout(() => { clickCount = 0; }, 3000);
+                });
             });
 
             function clearSession() {
@@ -1122,52 +1036,21 @@
                 document.getElementById('login-screen').style.display = 'flex';
             }
 
-            // حماية الصفحة: إذا تم عمل تحديث، يطلب الدخول مرة أخرى
-            window.addEventListener('load', () => {
-                const isLoggedIn = localStorage.getItem('isLoggedIn');
-                const loginTime = localStorage.getItem('loginTime');
-                const now = new Date().getTime();
+            // فتح لوحة الإدارة من وحدة التحكم
+            console.log("🔐 للوصول السريع للوحة الإدارة: adminPanelAccess()");
+            window.adminPanelAccess = function () {
+                document.getElementById('adminPanel').style.display = 'block';
+                refreshUsers();
+                showToast("👑 تم فتح لوحة الإدارة");
+            };
 
-                // تحديد مدة الصلاحية (مثلاً 10 دقائق = 10 * 60 * 1000 ملي ثانية)
-                const expiryDuration = 5 * 60 * 1000;
-
-                if (isLoggedIn === 'true' && loginTime) {
-                    // حساب كم مر من الوقت منذ آخر دخول
-                    const timePassed = now - parseInt(loginTime);
-
-                    if (timePassed < expiryDuration) {
-                        // إذا مر أقل من 10 دقائق، أدخله مباشرة وأخفِ شاشة القفل
-                        document.getElementById('login-screen').style.display = 'none';
-                        showToast("✅ تم استعادة الجلسة");
-                        updateDailySystem(username);
-                        updateDailySystem();
-                        // اختياري: تحديث الوقت لكي يبدأ العداد من جديد مع كل فتح للتطبيق
-                        localStorage.setItem('loginTime', now);
-                    } else {
-                        // إذا انتهت المدة، اطلب تسجيل الدخول وامسح البيانات القديمة
-                        localStorage.removeItem('isLoggedIn');
-                        localStorage.removeItem('loginTime');
-                        document.getElementById('login-screen').style.display = 'flex';
-                    }
-                } else {
-                    document.getElementById('login-screen').style.display = 'flex';
-                }
-            }); </script>
-
-        <script>
-
+            // التسجيل في Service Worker
             if ('serviceWorker' in navigator) {
-
                 navigator.serviceWorker.register('/service-worker.js')
-                    .then(() => {
-
-                        console.log("SW Registered");
-
-                    });
-
+                    .then(() => { console.log("SW Registered"); });
             }
-
         </script>
+    </div>
 </body>
 
 </html>
